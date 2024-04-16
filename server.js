@@ -218,16 +218,11 @@ app.get("/calender", function(req, res){
     res.render("calender");
 });
 
-app.get("/doctor", async function(req, res){
-    try{
-        const list = await Doctors.find({}).exec();
-        res.render("doctor", {list : list});    
-    }
-    catch(err){
-        console.error(err);
-        res.status(500).send("Lỗi truy vấn cơ sở dữ liệu");
-    }
-})
+app.get("/doctor", function(req, res){
+    Doctors.find({}, function(err, list){
+        res.render("doctor", {list : list})
+    });
+});
 
 app.get("/profile/:DocID", function(req, res){
     //let ID = (req.params.DocID);
