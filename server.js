@@ -218,6 +218,24 @@ app.get("/calender", function(req, res){
     res.render("calender");
 });
 
+app.get("/doctor", async function(req, res){
+    try{
+        const list = await Doctors.find({}).exec();
+        res.render("doctor", {list : list});    
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).send("Lỗi truy vấn cơ sở dữ liệu");
+    }
+})
+
+app.get("/profile/:DocID", function(req, res){
+    //let ID = (req.params.DocID);
+    Doctors.findOne({_id: ID}, function(err, doctor){
+        res.render("profile", {doctor: doctor})
+    })
+ });
+
 app.listen(5500, function(){
     console.log("server turn on\n");
 });
