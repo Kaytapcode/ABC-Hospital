@@ -89,6 +89,17 @@ class DoctorInfo extends Information{
 
 class PaitenceInfo extends Information{
 
+    constructor(name, age, gender, disease){
+        super(name, age, gender);
+        this.Disease = disease; 
+    }
+
+    set Disease(disease){
+        this._disease = disease;
+    }
+
+    get Disease(){return this._disease};
+
 }
 
 class Person{
@@ -181,8 +192,30 @@ app.use(express.static("benh_nhan"));
 app.use(express.static("forms"));
 app.use(express.static("login_signup"));
 
-app.get("/mother", function(req, res){
-    res.send("HELLO MOTHERFUCKER\n");
+app.get("/home", function(req, res){
+    let day = "";
+    res.render("home", {day: day});
+    //res.send("HELLO MOTHERFUCKER\n");
+});
+
+app.get("/login", function(req, res){
+    res.render("login");
+})
+
+app.get("/signup", function(req, res){
+    res.render("signup");
+})
+
+app.get("/data", function(req, res){
+    res.render("data");
+})
+
+app.get("/lol", function(req, res){
+    res.render("lol");
+})
+
+app.get("/calender", function(req, res){
+    res.render("calender");
 });
 
 app.listen(5500, function(){
