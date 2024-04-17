@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Đăng Nhập </title>
+  <title> Thông Tin Bác Sĩ </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <link href="../assets/img/favicon.png" rel="icon">
@@ -48,18 +48,22 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active fw-bold" href="../index.html#hero">Trang Chủ</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#about">Giới Thiệu</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#services">Dịch Vụ</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#departments">Cơ Sở Vật Chất</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#doctors">Bác Sĩ</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#contact">Liên Hệ</a></li>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="./home_benhnhan.html">Home</a></li>
+            <li><a class="nav-link scrollto active fw-bold text-uppercase" href="./check_profile_bac_si.html">Thông Tin Bác Sĩ</a></li>          
+            <li>            
+                <div class="dropdown">
+                    <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="#">Thông Tin Cá Nhân</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item text-uppercase" href="./ho_so_benh_an.html">Hồ Sơ Bệnh Án</a></li>
+                    <li><a class="dropdown-item text-uppercase" href="./update_thong_tin_ca_nhan.html">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
+                    </ul>
+                </div>
+            </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="./login.html" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
-      <a href="./signup.html" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
+      <a href="./booking/index.html" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
 
     </div>
   </header><!-- End Header -->
@@ -68,75 +72,60 @@
 
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2> Đăng Nhập </h2>
-          <ol>
-            <li><a href="../index.html">Trang Chủ</a></li>
-            <li>Đăng Nhập</li>
-          </ol>
-        </div>
-
-      </div>
+      
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
-      <div class="container" align="center">
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col col-md-6">
-            <div align="center" class="h4 fw-bold"> Nhân Viên Y Tế </div>
-            <div class="row">
-              <div class="col col-md-1"></div>
-              <div class="col col-md-10">
-                <form method="post" action="../forms/login.php">
-                  <div class="mb-3">
-                    <label for="inputMsnv1" class="form-label">Mã Số Nhân Viên <nobr style="color: red;">*</nobr></label>
-                    <input type="text" class="form-control" id="inputMsnv1" name="inputMsnv1">
-                  </div>
-                  <div class="mb-3">
-                    <label for="inputPassword1" class="form-label">Mật Khẩu <nobr style="color: red;">*</nobr></label>
-                    <input type="password" class="form-control" id="inputPassword1" name="inputPassword1">
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="check1" name="check1">
-                    <label class="form-check-label" for="check1">Kiểm Tra Tôi</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Nhân Viên Đăng Nhập</button>
-                </form>
+        <h1 align="center"> Profile Bác Sĩ </h1>
+        <div class="container">
+          <div class="row">
+            <div class="col col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img src="../assets/img/doctors/doctors-1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Bác Sĩ Walter White</h5>
+                  <p class="card-text">Lãnh đạo uyên bác, tận tâm và có kiến thức sâu rộng về lĩnh vực y tế.</p>
+                  <a href="../forms/doctor_profile.php?id=1" class="btn btn-primary">Xem Profile</a>
+                </div>
               </div>
-              <div class="col col-md-1"></div>
             </div>
-          </div>        
-
-          <div class="col col-md-6">
-            <div align="center" class="h4 fw-bold"> Bệnh Nhân </div>
-            <div class="row">
-              <div class="col col-md-1"></div>
-              <div class="col col-md-10">
-                <form method="post" action="../forms/login.php">
-                  <div class="mb-3">
-                    <label for="inputPhoneNumber" class="form-label"> Số Điện Thoại <nobr style="color: red;">*</nobr></label>
-                    <input type="text" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber">
-                  </div>
-                  <div class="mb-3">
-                    <label for="inputPassword2" class="form-label"> Mật Khẩu <nobr style="color: red;">*</nobr></label>
-                    <input type="password" class="form-control" id="inputPassword2" name="inputPassword2">
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="check2" name="check2">
-                    <label class="form-check-label" for="check2">Kiểm Tra Tôi</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Bệnh Nhân Đăng Nhập</button>
-                </form>
+  
+            <div class="col col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img src="../assets/img/doctors/doctors-2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Bác Sĩ Gây Mê Sarah Jhonson</h5>
+                  <p class="card-text">Chuyên gia an toàn, kỹ thuật và chăm sóc sức khỏe trong quá trình phẫu thuật.</p>
+                  <a href="../forms/doctor_profile.php?id=2" class="btn btn-primary">Xem Profile</a>
+                </div>
               </div>
-              <div class="col col-md-1"></div>
+            </div>
+  
+            <div class="col col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img src="../assets/img/doctors/doctors-3.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Bác Sĩ Tim Mạch William Anderson</h5>
+                  <p class="card-text">Chuyên gia tận tâm, giàu kinh nghiệm trong chẩn đoán và điều trị các vấn đề về tim mạch.</p>
+                  <a href="../forms/doctor_profile.php?id=3" class="btn btn-primary">Xem Profile</a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>    
-      </div>
+
+          <div class="row">
+            <div class="col col-md-4">
+              <div class="card" style="width: 18rem;">
+                <img src="../assets/img/doctors/doctors-4.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Bác Sĩ Giải Phẫu Thần Kinh Amanda Jepson</h5>
+                  <p class="card-text">Chuyên gia hiểu biết sâu sắc về hệ thống thần kinh và kỹ thuật phẫu thuật.</p>
+                  <a href="../forms/doctor_profile.php?id=4" class="btn btn-primary">Xem Profile</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </section>
 
   </main><!-- End #main -->
