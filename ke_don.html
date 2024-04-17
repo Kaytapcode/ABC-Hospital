@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title> Kê Đơn </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="./assets/img/favicon.png" rel="icon">
+  <link href="./assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="./assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="./assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="./assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="./assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope"></i> <a href="mailto:abchospitalcontact@example.com">abchospitalcontact@example.com</a>
+        <i class="bi bi-phone"></i> +1 5589 55488 55
+      </div>
+      <div class="d-none d-lg-flex social-links align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="./index.html" class="text-decoration-none">ABC Hospital</a></h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="./home_bacsi.html">Home</a></li>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="./gieo_ca.html">Gieo Ca</a></li>          
+            <li>            
+                <div class="dropdown">
+                    <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle active" href="./ke_don.html">Kê Đơn</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item text-uppercase" href="./thuoc.html">Thuốc</a></li>
+                    <li><a class="dropdown-item text-uppercase" href="./trang_thiet_bi.html">Trang Thiết Bị</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="./theo_doi_benh_nhan.html">Theo dõi bệnh nhân</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <a href="./booking/index.html" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+        <h1 align="center" class="text-uppercase"> Kê Đơn </h1>
+        
+        <form action="./query/connectDB.php" method="POST">
+          <div class="container">
+            <div class="row input-group mb-4">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">họ và tên bệnh nhân: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <input type="text" id="name_ke_don" name="name_ke_don" class="form-control">
+              </div>
+
+              <div class="col col-md-1"></div>
+            </div>
+
+            <div class="row input-group mb-4">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">mã số bệnh nhân: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <input type="text" id="number_ke_don" name="number_ke_don" class="form-control">
+              </div>
+
+              <div class="col col-md-1"></div>
+            </div>
+
+            <div class="row input-group mb-4">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">triệu chứng: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <textarea name="trieu_chung_ke_don" id="trieu_chung_ke_don" cols="30" rows="5" class="form-control"></textarea>
+              </div>
+
+              <div class="col col-md-1"></div>
+            </div>
+
+            <div class="row input-group mb-4">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">chẩn đoán: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <textarea name="chan_doan_ke_don" id="chan_doan_ke_don" cols="30" rows="5" class="form-control"></textarea>
+              </div>
+
+              <div class="col col-md-1"></div>
+            </div>
+
+            <script>
+              $(document).ready(function() {
+                $("#input_may_moc_1").show();
+                $("#input_may_moc_2").hide();
+                $("#input_may_moc_3").hide();
+                $("#input_may_moc_4").hide();
+                $("#input_may_moc_5").hide();
+              });
+
+              function hide_the_selected_may_moc(id, nextshow) {
+                let temp = document.querySelector(id).value;
+                let id_selected;
+
+                if(temp == "Máy đọc hình ảnh dùng trong y tế") {
+                  id_selected = ".may_moc_1";
+                } else if(temp == "Thiết bị phẫu thuật LASIK") {
+                  id_selected = ".may_moc_2";
+                } else if(temp == "Thiết bị Laser y tế") {
+                  id_selected = ".may_moc_3";
+                } else if(temp == "Máy tim phổi") {
+                  id_selected = ".may_moc_4";
+                } else if(temp == "Máy thở y tế") {
+                  id_selected = ".may_moc_5";
+                } else if(temp == "Máy lọc máu") {
+                  id_selected = ".may_moc_6";
+                } else if(temp == "Tủ lồng kính") {
+                  id_selected = ".may_moc_7";
+                }
+                
+                $(document).ready(function() {
+                  $(id_selected).hide();
+                  $(nextshow).show();
+                });
+              }
+            </script>
+
+            <div class="row input-group mb-4" id="input_may_moc_1">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Máy: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_may_moc_1" name="select_may_moc_1">
+                    <option>Chọn Máy:</option>
+                    <option value="Máy đọc hình ảnh dùng trong y tế" class="may_moc_1">Máy đọc hình ảnh dùng trong y tế</option>
+                    <option value="Thiết bị phẫu thuật LASIK" class="may_moc_2">Thiết bị phẫu thuật LASIK</option>
+                    <option value="Thiết bị Laser y tế" class="may_moc_3">Thiết bị Laser y tế</option>
+                    <option value="Máy tim phổi" class="may_moc_4">Máy tim phổi</option>
+                    <option value="Máy thở y tế" class="may_moc_5">Máy thở y tế</option>
+                    <option value="Máy lọc máu" class="may_moc_6">Máy lọc máu</option>
+                    <option value="Tủ lồng kính" class="may_moc_7">Tủ lồng kính</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_may_moc_2" class="btn btn-primary" onclick="hide_the_selected_may_moc('#select_may_moc_1', '#input_may_moc_2')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_may_moc_2">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Máy: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_may_moc_2" name="select_may_moc_2">
+                    <option>Chọn Máy:</option>
+                    <option value="Máy đọc hình ảnh dùng trong y tế" class="may_moc_1">Máy đọc hình ảnh dùng trong y tế</option>
+                    <option value="Thiết bị phẫu thuật LASIK" class="may_moc_2">Thiết bị phẫu thuật LASIK</option>
+                    <option value="Thiết bị Laser y tế" class="may_moc_3">Thiết bị Laser y tế</option>
+                    <option value="Máy tim phổi" class="may_moc_4">Máy tim phổi</option>
+                    <option value="Máy thở y tế" class="may_moc_5">Máy thở y tế</option>
+                    <option value="Máy lọc máu" class="may_moc_6">Máy lọc máu</option>
+                    <option value="Tủ lồng kính" class="may_moc_7">Tủ lồng kính</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_may_moc_3" class="btn btn-primary" onclick="hide_the_selected_may_moc('#select_may_moc_2', '#input_may_moc_3')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_may_moc_3">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Máy: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_may_moc_3" name="select_may_moc_3">
+                    <option>Chọn Máy:</option>
+                    <option value="Máy đọc hình ảnh dùng trong y tế" class="may_moc_1">Máy đọc hình ảnh dùng trong y tế</option>
+                    <option value="Thiết bị phẫu thuật LASIK" class="may_moc_2">Thiết bị phẫu thuật LASIK</option>
+                    <option value="Thiết bị Laser y tế" class="may_moc_3">Thiết bị Laser y tế</option>
+                    <option value="Máy tim phổi" class="may_moc_4">Máy tim phổi</option>
+                    <option value="Máy thở y tế" class="may_moc_5">Máy thở y tế</option>
+                    <option value="Máy lọc máu" class="may_moc_6">Máy lọc máu</option>
+                    <option value="Tủ lồng kính" class="may_moc_7">Tủ lồng kính</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_may_moc_4" class="btn btn-primary" onclick="hide_the_selected_may_moc('#select_may_moc_3', '#input_may_moc_4')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_may_moc_4">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Máy: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_may_moc_4" name="select_may_moc_4">
+                    <option>Chọn Máy:</option>
+                    <option value="Máy đọc hình ảnh dùng trong y tế" class="may_moc_1">Máy đọc hình ảnh dùng trong y tế</option>
+                    <option value="Thiết bị phẫu thuật LASIK" class="may_moc_2">Thiết bị phẫu thuật LASIK</option>
+                    <option value="Thiết bị Laser y tế" class="may_moc_3">Thiết bị Laser y tế</option>
+                    <option value="Máy tim phổi" class="may_moc_4">Máy tim phổi</option>
+                    <option value="Máy thở y tế" class="may_moc_5">Máy thở y tế</option>
+                    <option value="Máy lọc máu" class="may_moc_6">Máy lọc máu</option>
+                    <option value="Tủ lồng kính" class="may_moc_7">Tủ lồng kính</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_may_moc_5" class="btn btn-primary" onclick="hide_the_selected_may_moc('#select_may_moc_4', '#input_may_moc_5')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_may_moc_5">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Máy: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_may_moc_5" name="select_may_moc_5">
+                    <option>Chọn Máy:</option>
+                    <option value="Máy đọc hình ảnh dùng trong y tế" class="may_moc_1">Máy đọc hình ảnh dùng trong y tế</option>
+                    <option value="Thiết bị phẫu thuật LASIK" class="may_moc_2">Thiết bị phẫu thuật LASIK</option>
+                    <option value="Thiết bị Laser y tế" class="may_moc_3">Thiết bị Laser y tế</option>
+                    <option value="Máy tim phổi" class="may_moc_4">Máy tim phổi</option>
+                    <option value="Máy thở y tế" class="may_moc_5">Máy thở y tế</option>
+                    <option value="Máy lọc máu" class="may_moc_6">Máy lọc máu</option>
+                    <option value="Tủ lồng kính" class="may_moc_7">Tủ lồng kính</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1"></div>
+            </div>
+
+            <script>
+              $(document).ready(function() {
+                $("#input_thuoc_1").show();
+                $("#input_thuoc_2").hide();
+                $("#input_thuoc_3").hide();
+                $("#input_thuoc_4").hide();
+                $("#input_thuoc_5").hide();
+              });
+
+              function hide_the_selected_thuoc(id, nextshow) {
+                let temp = document.querySelector(id).value;
+                let id_selected;
+
+                if(temp == "Paracetamol") {
+                  id_selected = ".thuoc_1";
+                } else if(temp == "Alexan") {
+                  id_selected = ".thuoc_2";
+                } else if(temp == "Motilum M") {
+                  id_selected = ".thuoc_3";
+                } else if(temp == "Smecta") {
+                  id_selected = ".thuoc_4";
+                } else if(temp == "Mỡ Eurax") {
+                  id_selected = ".thuoc_5";
+                } else if(temp == "Oxy già") {
+                  id_selected = ".thuoc_6";
+                } else if(temp == "Nước muối sinh lý") {
+                  id_selected = ".thuoc_7";
+                }
+                
+                $(document).ready(function() {
+                  $(id_selected).hide();
+                  $(nextshow).show();
+                });
+              }
+            </script>
+
+            <div class="row input-group mb-4" id="input_thuoc_1">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Thuốc: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_thuoc_1" name="select_thuoc_1">
+                    <option selected>Chọn Thuốc:</option>
+                    <option value="Paracetamol" class="thuoc_1">Paracetamol </option>
+                    <option value="Alexan" class="thuoc_2">Alexan</option>
+                    <option value="Motilum M" class="thuoc_3">Motilum M</option>
+                    <option value="Smecta" class="thuoc_4">Smecta</option>
+                    <option value="Mỡ Eurax" class="thuoc_5">Mỡ Eurax</option>
+                    <option value="Oxy già" class="thuoc_6">Oxy già</option>
+                    <option value="Nước muối sinh lý" class="thuoc_7">Nước muối sinh lý</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_thuoc_2" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_1', '#input_thuoc_2')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_thuoc_2">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Thuốc: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_thuoc_2" name="select_thuoc_2">
+                    <option selected>Chọn Thuốc:</option>
+                    <option value="Paracetamol " class="thuoc_1">Paracetamol </option>
+                    <option value="Alexan" class="thuoc_2">Alexan</option>
+                    <option value="Motilum M" class="thuoc_3">Motilum M</option>
+                    <option value="Smecta" class="thuoc_4">Smecta</option>
+                    <option value="Mỡ Eurax" class="thuoc_5">Mỡ Eurax</option>
+                    <option value="Oxy già" class="thuoc_6">Oxy già</option>
+                    <option value="Nước muối sinh lý" class="thuoc_7">Nước muối sinh lý</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_thuoc_3" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_2', '#input_thuoc_3')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_thuoc_3">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Thuốc: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_thuoc_3" name="select_thuoc_3">
+                    <option selected>Chọn Thuốc:</option>
+                    <option value="Paracetamol " class="thuoc_1">Paracetamol </option>
+                    <option value="Alexan" class="thuoc_2">Alexan</option>
+                    <option value="Motilum M" class="thuoc_3">Motilum M</option>
+                    <option value="Smecta" class="thuoc_4">Smecta</option>
+                    <option value="Mỡ Eurax" class="thuoc_5">Mỡ Eurax</option>
+                    <option value="Oxy già" class="thuoc_6">Oxy già</option>
+                    <option value="Nước muối sinh lý" class="thuoc_7">Nước muối sinh lý</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_thuoc_4" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_3', '#input_thuoc_4')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_thuoc_4">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Thuốc: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_thuoc_4" name="select_thuoc_4">
+                    <option selected>Chọn Thuốc:</option>
+                    <option value="Paracetamol " class="thuoc_1">Paracetamol </option>
+                    <option value="Alexan" class="thuoc_2">Alexan</option>
+                    <option value="Motilum M" class="thuoc_3">Motilum M</option>
+                    <option value="Smecta" class="thuoc_4">Smecta</option>
+                    <option value="Mỡ Eurax" class="thuoc_5">Mỡ Eurax</option>
+                    <option value="Oxy già" class="thuoc_6">Oxy già</option>
+                    <option value="Nước muối sinh lý" class="thuoc_7">Nước muối sinh lý</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1">
+                <p id="them_thuoc_5" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_4', '#input_thuoc_5')"> + </p>
+              </div>
+            </div>
+
+            <div class="row input-group mb-4" id="input_thuoc_5">
+              <div class="col col-md-3">
+                <h4 class="text-uppercase">Thuốc: </h4>
+              </div>
+
+              <div class="col col-md-8">
+                <div class="input-group mb-3">
+                  <select class="form-select" id="select_thuoc_5" name="select_thuoc_5">
+                    <option selected>Chọn Thuốc:</option>
+                    <option value="Paracetamol " class="thuoc_1">Paracetamol </option>
+                    <option value="Alexan" class="thuoc_2">Alexan</option>
+                    <option value="Motilum M" class="thuoc_3">Motilum M</option>
+                    <option value="Smecta" class="thuoc_4">Smecta</option>
+                    <option value="Mỡ Eurax" class="thuoc_5">Mỡ Eurax</option>
+                    <option value="Oxy già" class="thuoc_6">Oxy già</option>
+                    <option value="Nước muối sinh lý" class="thuoc_7">Nước muối sinh lý</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col col-md-1"></div>
+            </div>
+
+            <div class="row">
+              <div class="col col-md-12" align="center"> 
+                <input type="submit" id="submit_maymoc" name="submit_maymoc" value="Xác Nhận" class="btn btn-primary">
+              </div>
+            </div>
+          </div>
+        </form>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>ABC Hospital</h3>
+            <p>
+              268 Lý Thường Kiệt <br>
+              Phường 14, Quận 10<br>
+              Thành phố Hồ Chí Minh <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> abchospitalcontact@example.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Links Hữu Ích</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Trang Chủ</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Giới Thiệu</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Dịch Vụ</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Điều Khoản Dịch Vụ</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Chính Sách Bảo Mật</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Dịch Vụ Của Chúng Tôi</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Khám Tim Mạch</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Cung Cấp Thuốc</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Chăm Sóc Bệnh Nhân</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Xét Nghiệm DNA</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Cấp Cứu Khẩn Cấp</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4 class="text-capitalize">Tham gia bản tin của chúng tôi</h4>
+            <p>Hãy tham gia bảng tin của chúng tôi để cập nhật tin tức, sự kiện và thông báo quan trọng từ bệnh viện. Đăng ký ngay để không bỏ lỡ thông tin mới nhất!</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>ABC Hospital</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          Designed by <a href="https://www.facebook.com/chuong.duong.5264382/">Khoa Than</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="./assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="./assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="./assets/js/main.js"></script>
+
+</body>
+
+</html>
