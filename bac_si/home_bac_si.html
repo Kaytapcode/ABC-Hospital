@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Đăng Nhập </title>
+  <title> Home </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <link href="../assets/img/favicon.png" rel="icon">
@@ -45,100 +45,124 @@
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto"><a href="../index.html" class="text-decoration-none">ABC Hospital</a></h1>
+      
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active fw-bold" href="../index.html#hero">Trang Chủ</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#about">Giới Thiệu</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#services">Dịch Vụ</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#departments">Cơ Sở Vật Chất</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#doctors">Bác Sĩ</a></li>
-          <li><a class="nav-link scrollto fw-bold" href="../index.html#contact">Liên Hệ</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="home_bac_si.html">Home</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="giao_ca.html">Giao ca</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="theo_doi_benh_nhan.html">Theo dõi bệnh nhân</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="quan_ly_benh_an.html">Quản lý bệnh án</a></li>
+          <li>            
+            <div class="dropdown">
+                <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="#">Kê đơn</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item text-uppercase align-items-center" href="./ke_don.html">Kê đơn</a></li>
+                  <li><a class="dropdown-item text-uppercase align-items-center" href="./thuoc.html">Thuốc</a></li>
+                  <li><a class="dropdown-item text-uppercase align-items-center" href="./thiet_bi.html">Trang thiết bị</a></li>
+                </ul>
+            </div>
+            </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="./login.html" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
-      <a href="./signup.html" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
+      <!-- <a href="#" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a> -->
 
     </div>
   </header><!-- End Header -->
 
   <main id="main">
-
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
-      <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2> Đăng Nhập </h2>
-          <ol>
-            <li><a href="../index.html">Trang Chủ</a></li>
-            <li>Đăng Nhập</li>
-          </ol>
-        </div>
-
-      </div>
+      
     </section><!-- End Breadcrumbs Section -->
-
     <section class="inner-page">
-      <div class="container" align="center">
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col col-md-6">
-            <div align="center" class="h4 fw-bold"> Nhân Viên Y Tế </div>
-            <div class="row">
-              <div class="col col-md-1"></div>
-              <div class="col col-md-10">
-                <form method="post" action="../forms/login.php">
-                  <div class="mb-3">
-                    <label for="inputMsnv1" class="form-label">Mã Số Nhân Viên <nobr style="color: red;">*</nobr></label>
-                    <input type="text" class="form-control" id="inputMsnv1" name="inputMsnv1">
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="container">
+                    <div class="row" style="background-color: aqua;">
+                      <div class="col-6 m-0 p-0" style="padding: 0px; margin: 0px;">
+  
+                        <img class="float-start m-0 p-0" src="../assets/img/doctors/doctors-1.jpg" alt="...">
+                      </div>
+                      <div class="col-6 m-0 p-0" style="padding: 0px; margin: 0px; background-color: aqua;">
+                        <h1 class="float-start" style="width: 650px; padding-top: 200px; color: black;">“Chữa bệnh là nghĩa vụ cao đẹp của bác sĩ”</h1>
+                        <p class="float-start" style="float: none; color: black;">_Giám đốc bệnh viện Arthur Pendragon_</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="mb-3">
-                    <label for="inputPassword1" class="form-label">Mật Khẩu <nobr style="color: red;">*</nobr></label>
-                    <input type="password" class="form-control" id="inputPassword1" name="inputPassword1">
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="check1" name="check1">
-                    <label class="form-check-label" for="check1">Kiểm Tra Tôi</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Nhân Viên Đăng Nhập</button>
-                </form>
-              </div>
-              <div class="col col-md-1"></div>
-            </div>
-          </div>        
+                  <!-- <div class="row">
+                    <div class="col-md-6">
 
-          <div class="col col-md-6">
-            <div align="center" class="h4 fw-bold"> Bệnh Nhân </div>
-            <div class="row">
-              <div class="col col-md-1"></div>
-              <div class="col col-md-10">
-                <form method="post" action="../forms/login.php">
-                  <div class="mb-3">
-                    <label for="inputPhoneNumber" class="form-label"> Số Điện Thoại <nobr style="color: red;">*</nobr></label>
-                    <input type="text" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber">
-                  </div>
-                  <div class="mb-3">
-                    <label for="inputPassword2" class="form-label"> Mật Khẩu <nobr style="color: red;">*</nobr></label>
-                    <input type="password" class="form-control" id="inputPassword2" name="inputPassword2">
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="check2" name="check2">
-                    <label class="form-check-label" for="check2">Kiểm Tra Tôi</label>
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Bệnh Nhân Đăng Nhập</button>
-                </form>
-              </div>
-              <div class="col col-md-1"></div>
+                      <img class="float-start" src="../assets/img/doctors/doctors-1.jpg" alt="...">
+                    </div>
+                    <div class="col-md-6">
+                      <h1 class="pt-200 float-start" style="background-color: black; width: 650px; padding-top: 200px; color: rgb(20, 191, 194);">“Chữa bệnh là nghĩa vụ cao đẹp của bác sĩ”</h1>
+                      <p class="pt-200 float-start" style="background-color: black; float: none; color: rgb(20, 191, 194);">_Giám đốc bệnh viện Arthur Pendragon_</p>
+                    </div>
+                  </div> -->
+                    <!-- <img class="float-start" src="../assets/img/doctors/doctors-1.jpg" alt="..."> -->
+                    <!-- <h1 class="pt-200 float-start" style="background-color: black; margin-left: 50px; width: 650px; padding-top: 200px; color: rgb(20, 191, 194);">“Chữa bệnh là nghĩa vụ cao đẹp của bác sĩ”</h1>
+                    <p class="pt-200 float-start" style="background-color: black; margin-left: 50px; float: none; color: rgb(20, 191, 194);">_Giám đốc bệnh viện Arthur Pendragon_</p> -->
+                    <div class="float-start carousel-caption d-none d-md-block">                      
+                      
+                      
+                    </div>
+                    
+                </div>
             </div>
-          </div>
+        </div>
+        
+        <!-- <div class="container-fluid m-4">
+            <div class="row flex-row flex-nowrap overflow-auto">
+                <div class="col col-4">
+                    <div class="card card-block" style="width: 18rem;">
+                        <img src="../assets/img/doctors/doctors-1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <nobr class="fw-bold">Giám Đốc Y Tế Walter White </nobr> - Lãnh đạo uyên bác, tận tâm và có kiến thức sâu rộng về lĩnh vực y tế.
+                            </p>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="col col-4">
+                    <div class="card card-block" style="width: 18rem;">
+                        <img src="../assets/img/doctors/doctors-2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <nobr class="fw-bold">Bác Sĩ Gây Mê Sarah Jhonson</nobr> - Chuyên gia an toàn, kỹ thuật và chăm sóc sức khỏe trong quá trình phẫu thuật.
+                            </p>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="col col-4">
+                    <div class="card card-block" style="width: 18rem;">
+                        <img src="../assets/img/doctors/doctors-3.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <nobr class="fw-bold">Bác Sĩ Tim Mạch William Anderson</nobr> - Chuyên gia tận tâm, giàu kinh nghiệm trong chẩn đoán và điều trị các vấn đề về tim mạch.
+                            </p>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="col col-4">
+                    <div class="card card-block" style="width: 18rem;">
+                        <img src="../assets/img/doctors/doctors-4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <nobr class="fw-bold">Bác Sĩ Giải Phẫu Thần Kinh<br> Amanda Jepson</nobr> - Chuyên gia hiểu biết sâu sắc về hệ thống thần kinh và kỹ thuật phẫu thuật.
+                            </p>
+                        </div>
+                    </div>    
+                </div>
+            </div>
         </div>    
-      </div>
     </section>
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -170,7 +194,7 @@
             </ul>
           </div>
 
-          <div class="col-lg-3 col-md-6 footer-links">
+          <!-- <div class="col-lg-3 col-md-6 footer-links">
             <h4>Dịch Vụ Của Chúng Tôi</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Khám Tim Mạch</a></li>
@@ -179,15 +203,15 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#">Xét Nghiệm DNA</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Cấp Cứu Khẩn Cấp</a></li>
             </ul>
-          </div>
+          </div> -->
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
+          <!-- <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4 class="text-capitalize">Tham gia bản tin của chúng tôi</h4>
-            <p>Hãy tham gia bảng tin của chúng tôi để cập nhật tin tức, sự kiện và thông báo quan trọng từ bệnh viện. Đăng ký ngay để không bỏ lỡ thông tin mới nhất!</p>
+            <p>Hãy tham gia bảng tin của chúng tôi để cập nhật tin tức, sự kiện và thông báo quan trọng từ bệnh viện. Đăng ký ngay để không bỏ lỡ thông tin mới!</p>
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>
-          </div>
+          </div> -->
 
         </div>
       </div>
