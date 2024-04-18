@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -184,6 +185,7 @@ const newDoctor = new Doctors({
 const app = express();
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("css"));
@@ -192,7 +194,9 @@ app.use(express.static("benh_nhan"));
 app.use(express.static("forms"));
 app.use(express.static("login_signup"));
 
-app.get("/home", function(req, res){
+//Phần HOMEPAGE (đăng nhập và đăng kí)---------------------------------------------//
+
+app.get("/", function(req, res){
     let day = "";
     res.render("home", {day: day});
     //res.send("HELLO MOTHERFUCKER\n");
@@ -200,6 +204,20 @@ app.get("/home", function(req, res){
 
 app.get("/login", function(req, res){
     res.render("login");
+})
+
+app.post("/login", function(req, res){
+    let loginname = req.body.inputMsnv1;
+    let password = req.body.inputPassword1;
+    Doctors.findOne({loginName: loginname}, function(err, foundUser){
+        if(foundUser){
+            console.log(loginname);
+            if(foundUser.password === password){
+                console.log(password);
+                res.redirect("/docAcc/" + foundUser._id);
+            }
+        }   
+    })
 })
 
 app.get("/signup", function(req, res){
@@ -210,22 +228,42 @@ app.get("/data", function(req, res){
     res.render("data");
 })
 
-app.get("/lol", function(req, res){
-    res.render("lol");
-})
-
 app.get("/calender", function(req, res){
     res.render("calender");
 });
 
+//Tài khoản của bác sĩ quản lý ở đây-------------------------------------------//
+
+//Đây là phần xử lý thông tin cá nhân của bác sĩ lên tài khoản của họ (docAcc)
+app.get("/docAcc/:DocID", function(req, res){
+    let ID = (req.params.DocID);
+    Doctors.findOne({_id: ID}, function(err, doctorData){
+        res.render("docAccount", {data: doctorData});
+    })
+});
+
+app.post("/docAcc/:DocID", function(req, res){
+    let ID = (req.params.DocID);
+    Doctors.findOne({_id: ID}, function(err, doctor){
+        res.render("docAccount");
+    })
+});
+
+//Tài khoản của bệnh nhân quản lý ở đây-----------------------------------------//
+
+app.get("/guestAccount", function(req, res){
+    res.render("paitentAccount");
+});
+
 app.get("/doctor", function(req, res){
     Doctors.find({}, function(err, list){
+        console.log(list[0]);
         res.render("doctor", {list : list})
     });
 });
 
 app.get("/profile/:DocID", function(req, res){
-    //let ID = (req.params.DocID);
+    let ID = (req.params.DocID);
     Doctors.findOne({_id: ID}, function(err, doctor){
         res.render("profile", {doctor: doctor})
     })
