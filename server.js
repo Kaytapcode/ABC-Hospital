@@ -18,6 +18,23 @@ const DoctorSchema = {
         specialized: String,
         degree: String,
         image: String
+    },
+    listOfPaitent: []
+}
+
+const PaitentSchema = {
+    loginName: String,
+    password: String,
+    email: String,
+    Info: {
+        name: String,
+        age: Number,
+        gender: String,
+        dayOfbirth: String,
+        phoneNum: String,
+        career: String,
+        typeOfdisease: String,
+        doctorComment: String
     }
 }
 
@@ -89,17 +106,44 @@ class DoctorInfo extends Information{
 }
 
 class PaitenceInfo extends Information{
-
-    constructor(name, age, gender, disease){
+    constructor(name, age, gender, dayOfbirth, phoneNum, career, typeOfdisease, doctorComment){
         super(name, age, gender);
-        this.Disease = disease; 
+        this.DayOfbirth = dayOfbirth;
+        this.PhoneNum = phoneNum;
+        this.Career = career;
+        this.TypeOfdisease = typeOfdisease;
+        this.DoctorComment = doctorComment;
     }
 
-    set Disease(disease){
-        this._disease = disease;
+    set DayOfbirth(dayOfbirth){
+        this._dayOfbirth = dayOfbirth;
     }
 
-    get Disease(){return this._disease};
+    get dayOfbirth(){return this._dayOfbirth};
+
+    set PhoneNum(phoneNum){
+        this._phoneNum = phoneNum;
+    }
+
+    get PhoneNum(){return this._phoneNum};
+
+    set Career(career){
+        this._career = career;
+    }
+
+    get Career(){return this._career};
+
+    set TypeOfdisease(typeOfdisease){
+        this._typeOfdisease = typeOfdisease;
+    }
+
+    get TypeOfdisease(){return this._typeOfdisease};
+
+    set DoctorComment(doctorComment){
+        this._doctorComment = doctorComment;
+    }
+
+    get DoctorComment(){return this._doctorComment};
 
 }
 
@@ -144,7 +188,16 @@ class Doctor extends Person{
 }
 
 class Paitence extends Person{
+    constructor(loginName, password, email, paitInfo){
+        super(loginName, password, email);
+        this.PaitInfo = paitInfo;
+    }
 
+    set PaitInfo(paitInfo){
+        this._paitInfo = paitInfo;
+    }
+
+    get PaitInfo(){return this._paitInfo};
 }
 
 const info = new Information("Le Nguyen Nam Khanh", "25", "male");
@@ -163,6 +216,25 @@ docInfo = new DoctorInfo(
 let Doc1 = new Doctor("KhanhPear3107", "hello123", "lekhanh98777@gmail.com", docInfo);
 
 const Doctors = mongoose.model("Doctor", new mongoose.Schema(DoctorSchema));
+const Paitents = mongoose.model("Paitent", new mongoose.Schema(PaitentSchema));
+
+const newPaitent = new Paitents({
+    loginName: "Supreme3byte",
+    password: "byebye",
+    email: "TuDuongThanh@gmail.com",
+    Info: {
+        name: "Dương Thanh Tú",
+        age: 20,
+        gender: "male",
+        dayOfbirth: "05/04/2003",
+        phoneNum: "0123456789",
+        career: "SVBK",
+        typeOfdisease: "Hoang tưởng cấp độ năng",
+        doctorComment: "Cần ít tự ái lại"
+    }
+});
+
+
 
 const newDoctor = new Doctors({
     loginName: Doc1.LoginName,
@@ -181,6 +253,7 @@ const newDoctor = new Doctors({
 });
 
 //newDoctor.save(); //đừng có ấn vô đây ha
+//newPaitent.save();
 
 const app = express();
 
@@ -207,16 +280,37 @@ app.get("/login", function(req, res){
 })
 
 app.post("/login", function(req, res){
-    let loginname = req.body.inputMsnv1;
-    let password = req.body.inputPassword1;
-    Doctors.findOne({loginName: loginname}, function(err, foundUser){
+    let docloginname = req.body.inputMsnv1;
+    let docpassword = req.body.inputPassword1;
+    let paitloginname = req.body.inputPhoneNumber;
+    let paitpassword = req.body.inputPassword2;
+
+    Doctors.findOne({loginName: docloginname}, function(err, foundUser){
         if(foundUser){
-            console.log(loginname);
-            if(foundUser.password === password){
-                console.log(password);
+            //console.log(loginname);
+            if(foundUser.password === docpassword){
+                //console.log(password);
                 res.redirect("/docAcc/" + foundUser._id);
             }
-        }   
+            else console.log("the password is incorrect, please try again!\n");
+        } 
+        if(err){
+            console.log("didn't found it, please sign up first\n");
+        }  
+    })
+
+    Paitents.findOne({loginName: paitloginname}, function(err, foundUser){
+        if(foundUser){
+            //console.log(loginname);
+            if(foundUser.password === paitpassword){
+                //console.log(password);
+                res.redirect("/guestAcc/" + foundUser._id);
+            }
+            else console.log("the password is incorrect, please try again!\n");
+        }
+        if(err){
+            console.log("didn't found it, please sign up first\n");
+        }     
     })
 })
 
@@ -235,6 +329,8 @@ app.get("/calender", function(req, res){
 //Tài khoản của bác sĩ quản lý ở đây-------------------------------------------//
 
 //Đây là phần xử lý thông tin cá nhân của bác sĩ lên tài khoản của họ (docAcc)
+
+//docAcc sẽ truyền đến home của account bác sĩ
 app.get("/docAcc/:DocID", function(req, res){
     let ID = (req.params.DocID);
     Doctors.findOne({_id: ID}, function(err, doctorData){
@@ -248,16 +344,103 @@ app.post("/docAcc/:DocID", function(req, res){
         res.render("docAccount");
     })
 });
+//----------------------------------------------------------//
+
+app.get("/lookup", function(req, res){
+    res.render("paitent_lookup");
+});
+
+//paitentList sẽ truyền đến phần theo dõi bệnh nhân của bác sĩ
+app.get("/paitentList/:DocID", function(req, res){
+    let ID = (req.params.DocID);
+    Doctors.findOne({_id: ID}, function(err, doctorData){
+        res.render("paitent_list", {data: doctorData});
+    })
+});
+
+//medicine sẽ truyền đến kho thuốc - kho thuốc này dùng chung cho mọi bác sĩ
+app.get("/medicineStorage/:DocID", function(req, res){
+    let ID = (req.params.DocID);
+    Doctors.findOne({_id: ID}, function(err, doctorData){
+        res.render("medicine", {data: doctorData});
+    })
+});
+
+//equipment sẽ truyền đến kho thiết bị y tế của bệnh viện
+app.get("/equipment/:DocID", function(req, res){
+    let ID = (req.params.DocID);
+    Doctors.findOne({_id: ID}, function(err, doctorData){
+        res.render("equipment", {data: doctorData});
+    })
+});
+
 
 //Tài khoản của bệnh nhân quản lý ở đây-----------------------------------------//
 
-app.get("/guestAccount", function(req, res){
-    res.render("paitentAccount");
+// app.get("/paitentAccount", function(req, res){
+//     res.render("paitentAccount");
+// });
+
+//guestAcc sẽ giúp ta đến với trang chủ chính của bênh nhân khi đăng nhập
+app.get("/guestAcc/:GuestID", function(req, res){
+    let ID = (req.params.GuestID);
+    Paitents.findOne({_id: ID}, function(err, paitentData){
+        res.render("paitentAccount", {data: paitentData});
+    })
 });
+
+app.post("/guestAcc/:GuestID", function(req, res){
+    let ID = (req.params.GuestID);
+    Paitents.findOne({_id: ID}, function(err, paitentData){
+        res.render("paitentAccount", {data: paitentData});
+    })
+});
+
+//-----------------------------------------------------------------//
+
+//personalInfo sẽ đưa chúng ta tới thông tin cá nhân của bệnh nhân và sửa đổi thông tin
+app.get("/personalInfo/:GuestID", function(req, res){
+    let ID = (req.params.GuestID);
+    Paitents.findOne({_id: ID}, function(err, paitentData){
+        res.render("paitentInfo", {data: paitentData});
+    })
+});
+
+app.post("/personalInfo/:GuestID", async function(req, res){
+    let ID = (req.params.GuestID);
+    const basePaitent = await Paitents.findOne({_id: ID});
+
+    let changedname = req.body.name_modify;
+    let changedphonenum = req.body.phone_number_modify;
+    let changedDOB = req.body.date_of_birth_modify;
+    let changedgender = req.body.gender_modify;
+    let changedjob = req.body.job_modify;
+
+    console.log(changedgender);
+
+    if(changedname !== basePaitent.Info.name){
+        await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.name': changedname}});
+    }
+    else if(changedgender !== basePaitent.Info.gender){
+        await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.gender': changedgender}});
+    }
+
+    await Paitents.findOne({_id: ID},  function(err, paitentData){
+        console.log(paitentData.Info.gender);
+        res.redirect("/personalInfo/" + paitentData._id);
+    })
+
+    // Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.name': changedname, 'Info.phoneNum': changedphonenum, 'Info.dayOfbirth': changedDOB, 'Info.gender': changedgender, 'Info.career': changedjob}}, function(err, paitentData){
+    //     console.log(changedjob);
+    //     //res.render("paitentInfo", {data: paitentData});
+    //     res.redirect("/personalInfo/" + paitentData._id);
+    // })
+});
+
 
 app.get("/doctor", function(req, res){
     Doctors.find({}, function(err, list){
-        console.log(list[0]);
+        //console.log(list[0]);
         res.render("doctor", {list : list})
     });
 });
