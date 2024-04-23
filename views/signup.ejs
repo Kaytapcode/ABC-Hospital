@@ -58,13 +58,8 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-<<<<<<< HEAD
-      <a href="http://localhost:5500/login" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
-      <a href="http://localhost:5500/signup" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
-=======
-      <a href="login.ejs" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
-      <a href="./signup.html" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
->>>>>>> 777d6d1b7208cf22ed5ce54f0e744c4eb1640582
+      <a href="/login" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
+      <a href="/signup" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
 
     </div>
   </header><!-- End Header -->
@@ -78,11 +73,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2> Đăng Ký </h2>
           <ol>
-<<<<<<< HEAD
             <li><a href="http://localhost:5500/">Trang Chủ</a></li>
-=======
-            <li><a href="http://localhost:5500/home">Trang Chủ</a></li>
->>>>>>> 777d6d1b7208cf22ed5ce54f0e744c4eb1640582
             <li>Đăng Ký</li>
           </ol>
         </div>
@@ -101,40 +92,40 @@
             <div class="row">
               <div class="col col-md-1"></div>
               <div class="col col-md-10">
-                <form method="post" action="../forms/signup.php">
+                <form method="post" action="/signup">
                     <div class="row">
                         <div class="col col-md-6">
                             <div class="mb-3">
-                                <label for="inputFirstName" class="form-label">Họ <nobr style="color: red;">*</nobr></label>
-                                <input type="text" class="form-control" id="inputFirstName" name="inputFirstName">
+                                <label for="inputFirstName" class="form-label">Họ và Tên <nobr style="color: red;">*</nobr></label>
+                                <input type="text" class="form-control" id="inputFirstName" name="inputFullName">
                             </div>                            
                         </div>                            
-                        <div class="col col-md-6">
+                        <!--<div class="col col-md-6">
                             <label for="inputLastName" class="form-label">Tên <nobr style="color: red;">*</nobr></label>
                             <input type="text" class="form-control" id="inputLastName" name="inputLastName">
-                        </div>
+                        </div>-->
                     </div>
                     <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Địa Chỉ Email <nobr style="color: red;">*</nobr></label>
-                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="inputEmail">
+                      <label for="inputBHYT" class="form-label">Tên tài khoản<nobr style="color: red;">*</nobr></label>
+                      <input type="text" class="form-control" id="inputBHYT" name="inputAccountName">
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword" class="form-label">Mật Khẩu <nobr style="color: red;">*</nobr></label>
                         <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                     </div>
                     <div class="mb-3">
-                      <label for="inputBHYT" class="form-label">Bảo Hiểm Y Tế <nobr style="color: red;">*</nobr></label>
-                      <input type="text" class="form-control" id="inputBHYT" name="inputBHYT">
-                    </div>
+                      <label for="inputEmail" class="form-label">Email<nobr style="color: red;">*</nobr></label>
+                      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="inputEmail">
+                  </div>
                     <div class="mb-3">
                       <label for="" class="form-label">Giới Tính <nobr style="color: red;">*</nobr></label>
                       <div class="form-check form-check-inline">                        
                         <label class="form-check-label" for="inputGender">Nam</label>
-                        <input class="form-check-input" type="radio" id="inputMale" name="inputGender" value="Nam">
+                        <input class="form-check-input" type="radio" id="inputMale" name="inputGender" value="male">
                       </div>
                       <div class="form-check form-check-inline">                        
                         <label class="form-check-label" for="inputGender">Nữ</label>
-                        <input class="form-check-input" type="radio" id="inputFemale" name="inputGender" value="Nữ">
+                        <input class="form-check-input" type="radio" id="inputFemale" name="inputGender" value="female">
                       </div>
                     </div>                    
                     <button type="submit" class="btn btn-primary" align="center">Đăng Ký</button>                    

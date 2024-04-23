@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb+srv://khanhpear:123@cluster0.rzo0p3f.mongodb.net/hospital?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
 
 const DoctorSchema = {
-    loginName: String,
+    loginName: { type: String, unique: true },
     password: String,
     email: String,
     Info: {
@@ -23,7 +23,7 @@ const DoctorSchema = {
 }
 
 const PaitentSchema = {
-    loginName: String,
+    loginName: { type: String, unique: true },
     password: String,
     email: String,
     Info: {
@@ -316,7 +316,46 @@ app.post("/login", function(req, res){
 
 app.get("/signup", function(req, res){
     res.render("signup");
-})
+});
+
+app.post("/signup", function(req, res){
+    let paitFullName = req.body.inputFullName;
+    let paitAccountName = req.body.inputAccountName;
+    let paitPassword = req.body.inputPassword;
+    let paitEmail = req.body.inputEmail;
+    let paitGender = req.body.inputGender;
+
+    const newPait = new Paitents({
+        loginName: paitAccountName,
+        password: paitPassword,
+        email: paitEmail,
+        Info: {
+            name: paitFullName,
+            age: 0,
+            gender: paitGender,
+            dayOfbirth: "dd/mm/yyyy",
+            phoneNum: "",
+            career: "",
+            typeOfdisease: "",
+            doctorComment: ""
+        }
+    });
+
+    newPait.save(function(err, savedPait) {
+        if (err) {
+            if(err.code === 11000){
+                console.log("this name already exist, please choose another username");
+                res.redirect("/signup");
+            }
+            else console.error("", err);
+        } else {
+            const id = savedPait._id;
+            res.redirect("/guestAcc/" + id);
+        }
+    });
+    
+   //res.render("signup");
+});
 
 app.get("/data", function(req, res){
     res.render("data");
@@ -421,12 +460,22 @@ app.post("/personalInfo/:GuestID", async function(req, res){
     if(changedname !== basePaitent.Info.name){
         await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.name': changedname}});
     }
-    else if(changedgender !== basePaitent.Info.gender){
+    if(changedphonenum !== basePaitent.Info.phoneNum){
+        await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.phoneNum': changedphonenum}});
+    }
+    if(changedDOB !== basePaitent.Info.dayOfbirth){
+        await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.dayOfbirth': changedDOB}});
+    }
+    if(changedgender !== basePaitent.Info.gender && changedgender !== undefined){
         await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.gender': changedgender}});
+    }
+    if(changedjob !== basePaitent.Info.career){
+        //console.log(changedjob);
+        await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.career': changedjob}});
     }
 
     await Paitents.findOne({_id: ID},  function(err, paitentData){
-        console.log(paitentData.Info.gender);
+        //console.log(paitentData.Info.gender);
         res.redirect("/personalInfo/" + paitentData._id);
     })
 
