@@ -306,7 +306,10 @@ app.post("/login", function(req, res){
                 //console.log(password);
                 res.redirect("/guestAcc/" + foundUser._id);
             }
-            else console.log("the password is incorrect, please try again!\n");
+            else {
+                console.log("the password is incorrect, please try again!\n");
+                res.render("/login", {message: "password ís incorrect, please try again !"});
+            }
         }
         if(err){
             console.log("didn't found it, please sign up first\n");
@@ -413,7 +416,6 @@ app.get("/equipment/:DocID", function(req, res){
     })
 });
 
-
 //Tài khoản của bệnh nhân quản lý ở đây-----------------------------------------//
 
 // app.get("/paitentAccount", function(req, res){
@@ -486,13 +488,15 @@ app.post("/personalInfo/:GuestID", async function(req, res){
     // })
 });
 
-
-app.get("/doctor", function(req, res){
-    Doctors.find({}, function(err, list){
-        //console.log(list[0]);
-        res.render("doctor", {list : list})
-    });
+//hàm này giúp bệnh nhân kiểm tra thông tin của bác sĩ
+app.get("/doctorlist/:GuestID", async function(req, res){
+    let ID = (req.params.GuestID);
+    const pait = await Paitents.findOne({_id: ID}, function(err, paitentData){});
+    Doctors.find({}, function(err, docData){
+        res.render("doctor", {docData: docData, data: pait});
+    })
 });
+
 
 app.get("/profile/:DocID", function(req, res){
     let ID = (req.params.DocID);
