@@ -127,6 +127,11 @@
                         <label class="form-check-label" for="inputGender">Nữ</label>
                         <input class="form-check-input" type="radio" id="inputFemale" name="inputGender" value="female">
                       </div>
+                        <%if(checkexisted===true) {%>
+                        <div class="alert alert-danger" role="alert", >
+                          <%= message %>
+                        </div>
+                        <%}%>
                     </div>                    
                     <button type="submit" class="btn btn-primary" align="center">Đăng Ký</button>                    
                 </form>

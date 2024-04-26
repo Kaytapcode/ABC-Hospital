@@ -104,6 +104,13 @@
                     <input type="checkbox" class="form-check-input" id="check1" name="check1">
                     <label class="form-check-label" for="check1">Kiểm Tra Tôi</label>
                   </div>
+
+                    <%if(checkpait1===false) {%>
+                    <div class="alert alert-danger" role="alert", >
+                      <%= message %>
+                    </div>
+                    <%}%>
+
                   <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Nhân Viên Đăng Nhập</button>
                 </form>
               </div>
@@ -129,7 +136,13 @@
                     <input type="checkbox" class="form-check-input" id="check2" name="check2">
                     <label class="form-check-label" for="check2">Kiểm Tra Tôi</label>
                   </div>
-                  
+          
+                  <%if(checkpait2===false) {%>
+                  <div class="alert alert-danger" role="alert", >
+                    <%= message %>
+                  </div>
+                  <%}%>
+
                   <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Bệnh Nhân Đăng Nhập</button>
                 </form>
               </div>

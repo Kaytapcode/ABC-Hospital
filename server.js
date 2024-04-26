@@ -276,7 +276,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/login", function(req, res){
-    res.render("login");
+    res.render("login", {checkpait1: true, checkpait2: true, message: ""});
 })
 
 app.post("/login", function(req, res){
@@ -292,7 +292,10 @@ app.post("/login", function(req, res){
                 //console.log(password);
                 res.redirect("/docAcc/" + foundUser._id);
             }
-            else console.log("the password is incorrect, please try again!\n");
+            else {
+                res.render("login",{checkpait1: false, checkpait2: true, message: "the password is incorrect, please try again!"});
+                console.log("the password is incorrect, please try again!\n");
+            }
         } 
         if(err){
             console.log("didn't found it, please sign up first\n");
@@ -307,8 +310,8 @@ app.post("/login", function(req, res){
                 res.redirect("/guestAcc/" + foundUser._id);
             }
             else {
-                console.log("the password is incorrect, please try again!\n");
-                res.render("/login", {message: "password ís incorrect, please try again !"});
+                res.render("login",{checkpait1: true, checkpait2: false, message: "the password is incorrect, please try again!"});
+                console.log("the password is incorrect, please try again!")
             }
         }
         if(err){
@@ -318,7 +321,7 @@ app.post("/login", function(req, res){
 })
 
 app.get("/signup", function(req, res){
-    res.render("signup");
+    res.render("signup", {checkexisted: false, message: ""});
 });
 
 app.post("/signup", function(req, res){
@@ -348,7 +351,7 @@ app.post("/signup", function(req, res){
         if (err) {
             if(err.code === 11000){
                 console.log("this name already exist, please choose another username");
-                res.redirect("/signup");
+                res.render("signup", {checkexisted: true, message: "this name already exist, please choose another username"});
             }
             else console.error("", err);
         } else {
