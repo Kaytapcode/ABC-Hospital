@@ -353,6 +353,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'booking')]);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("css"));
@@ -598,7 +599,7 @@ app.get("/guestAcc/:GuestID", function(req, res){
 app.post("/guestAcc/:GuestID", function(req, res){
     let ID = (req.params.GuestID);
     Paitents.findOne({_id: ID}, function(err, paitentData){
-        res.render("paitentAccount", {data: paitentData});
+        res.render("paitentAccount", {paitData: paitentData});
     })
 });
 
@@ -608,7 +609,7 @@ app.post("/guestAcc/:GuestID", function(req, res){
 app.get("/personalInfo/:GuestID", function(req, res){
     let ID = (req.params.GuestID);
     Paitents.findOne({_id: ID}, function(err, paitentData){
-        res.render("paitentInfo", {data: paitentData});
+        res.render("paitentInfo", {paitData: paitentData});
     })
 });
 
@@ -657,7 +658,7 @@ app.get("/paitentProfile/:GuestID", function(req, res){
     let paitID = (req.params.GuestID);
     
     Paitents.findOne({_id: paitID}, function(err, data){
-        res.render("paitent_profile", { data: data});
+        res.render("paitent_profile", { paitData: data});
     })
     
 });
@@ -665,12 +666,12 @@ app.get("/paitentProfile/:GuestID", function(req, res){
 //hàm này giúp bệnh nhân kiểm tra thông tin của bác sĩ
 app.get("/doctorlist/:GuestID", async function(req, res){
     let ID = (req.params.GuestID);
-    const pait = await Paitents.findOne({_id: ID}, function(err, paitentData){});
-    Doctors.find({}, function(err, docData){
-        res.render("doctor", {docData: docData, data: pait});
-    })
+    Paitents.findOne({_id: ID}, function(err, paitentData){
+        Doctors.find({}, function(err, docData){
+            res.render("doctor", {docData: docData, paitData: paitentData});
+        })
+    });
 });
-
 
 app.get("/profile/:DocID", function(req, res){
     let ID = (req.params.DocID);
@@ -678,6 +679,18 @@ app.get("/profile/:DocID", function(req, res){
         res.render("profile", {doctor: doctor})
     })
  });
+
+ //Hàm này chính là hàm booking Bác sĩ của bệnh nhân
+ app.get("/booking/:GuestID", function(req, res){
+    let paitID = (req.params.GuestID);
+    Doctors.find({}, function(err, docData){
+        Paitents.findOne({_id: paitID}, function(err, paitData){
+            res.render("booking", { paitData: paitData, docData: docData});
+        })
+    })  
+});
+
+
 
 app.listen(5500, function(){
     console.log("server turn on\n");

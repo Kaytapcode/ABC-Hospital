@@ -48,14 +48,14 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/guestAcc/<%= data._id %>">Home</a></li>
-            <li><a class="nav-link scrollto active fw-bold text-uppercase" href="/doctor/<%= data._id %>">Thông Tin Bác Sĩ</a></li>          
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/guestAcc/<%= paitData._id %>">Home</a></li>
+            <li><a class="nav-link scrollto active fw-bold text-uppercase" href="/doctorlist/<%= paitData._id %>">Thông Tin Bác Sĩ</a></li>          
             <li>            
                 <div class="dropdown">
                     <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="#">Thông Tin Cá Nhân</a>
                     <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-uppercase" href="/paitentList/<%= data._id %>">Hồ Sơ Bệnh Án</a></li>
-                    <li><a class="dropdown-item text-uppercase" href="/personalInfo/<%= data._id %>">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
+                    <li><a class="dropdown-item text-uppercase" href="/paitentProfile/<%= paitData._id %>">Hồ Sơ Bệnh Án</a></li>
+                    <li><a class="dropdown-item text-uppercase" href="/personalInfo/<%= paitData._id %>">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
                     </ul>
                 </div>
             </li>
@@ -63,7 +63,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="./booking/index.html" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+      <a href="../booking/<%= paitData._id %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
 
     </div>
   </header><!-- End Header -->

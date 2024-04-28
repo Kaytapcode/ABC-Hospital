@@ -49,14 +49,14 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/guestAcc/<%= data._id %>">Home</a></li>
-            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/doctorlist/<%= data._id %>">Thông Tin Bác Sĩ</a></li>          
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/guestAcc/<%= paitData._id %>">Home</a></li>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/doctorlist/<%= paitData._id %>">Thông Tin Bác Sĩ</a></li>          
           <li>            
             <div class="dropdown">
                 <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle active" href="#">Thông Tin Cá Nhân</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item text-uppercase" href="./ho_so_benh_an.html">Hồ Sơ Bệnh Án</a></li>
-                  <li><a class="dropdown-item text-uppercase active" href="/personalInfo/<%= data._id %>">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
+                  <li><a class="dropdown-item text-uppercase" href="/paitentProfile/<%= paitData._id %>">Hồ Sơ Bệnh Án</a></li>
+                  <li><a class="dropdown-item text-uppercase active" href="/personalInfo/<%= paitData._id %>">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
                 </ul>
             </div>
             </li>
@@ -64,7 +64,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="./booking/index.html" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+      <a href="../booking/<%= paitData._id %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
 
     </div>
   </header><!-- End Header -->
@@ -79,20 +79,20 @@
       <div class="container">        
         <h1 class="text-uppercase" style="margin-bottom: 24px;" align="center"> Thông Tin Cá Nhân </h1>
         
-        <form action="/personalInfo/<%= data._id %>" method="POST">
+        <form action="/personalInfo/<%= paitData._id %>" method="POST">
           <div class="row my-2">
             
             <div class="col col-md-3">
               <h5> 
                 Họ và Tên: 
                 <nobr id="name_default">
-                  <%= data.Info.name %>                
+                  <%= paitData.Info.name %>                
                 </nobr>                
               </h5>              
             </div>
 
             <div class="col col-md-2">
-              <input type="text" name="name_modify" id="name_modify" value= "<%= data.Info.name %>" class="form-control">
+              <input type="text" name="name_modify" id="name_modify" value= "<%= paitData.Info.name %>" class="form-control">
             </div>
 
             <div class="col col-md-1">
@@ -120,13 +120,13 @@
               <h5> 
                 Số Điện Thoại: 
                 <nobr id="phone_number_default">
-                  <%= data.Info.phoneNum %> 
+                  <%= paitData.Info.phoneNum %> 
                 </nobr>                
               </h5>              
             </div>
 
             <div class="col col-md-2">
-              <input type="number" name="phone_number_modify" id="phone_number_modify" value="<%= data.Info.phoneNum %>"  class="form-control">
+              <input type="number" name="phone_number_modify" id="phone_number_modify" value="<%= paitData.Info.phoneNum %>"  class="form-control">
             </div>
 
             <div class="col col-md-1">
@@ -156,13 +156,13 @@
               <h5> 
                 Ngày Sinh: 
                 <nobr id="date_of_birth_default">
-                  <%= data.Info.dayOfbirth %> 
+                  <%= paitData.Info.dayOfbirth %> 
                 </nobr>                
               </h5>              
             </div>
 
             <div class="col col-md-2">
-              <input type="text" name="date_of_birth_modify" id="date_of_birth_modify" value="<%= data.Info.dayOfbirth %>" class="form-control">
+              <input type="text" name="date_of_birth_modify" id="date_of_birth_modify" value="<%= paitData.Info.dayOfbirth %>" class="form-control">
             </div>
 
             <div class="col col-md-1">
@@ -190,7 +190,7 @@
               <h5> 
                 Giới Tính: 
                 <nobr id="gender_default">
-                  <%= data.Info.gender %> 
+                  <%= paitData.Info.gender %> 
                 </nobr>                
               </h5>              
             </div>
@@ -236,13 +236,13 @@
               <h5> 
                 Nghề Nghiệp: 
                 <nobr id="job_default">
-                  <%= data.Info.career %> 
+                  <%= paitData.Info.career %> 
                 </nobr>                
               </h5>              
             </div>
 
             <div class="col col-md-2">
-              <input type="text" name="job_modify" id="job_modify" value="<%= data.Info.career %>" class="form-control">
+              <input type="text" name="job_modify" id="job_modify" value="<%= paitData.Info.career %>" class="form-control">
             </div>
 
             <div class="col col-md-1">
