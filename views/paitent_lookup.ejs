@@ -48,22 +48,23 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/">Home</a></li>
-            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/doctor">Thông Tin Bác Sĩ</a></li>          
+          <!--<li><a class="nav-link scrollto fw-bold text-uppercase" href="/guestAcc/<%= paitData._id%>">Home</a></li>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/doctor/<%= paitData._id %>">Thông Tin Bác Sĩ</a></li>          
           <li>            
             <div class="dropdown">
                 <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle active" href="#">Thông Tin Cá Nhân</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item text-uppercase active" href="/">Hồ Sơ Bệnh Án</a></li>
-                  <li><a class="dropdown-item text-uppercase" href="/">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
+                  <li><a class="dropdown-item text-uppercase active" href="./ho_so_benh_an.html">Hồ Sơ Bệnh Án</a></li>
+                  <li><a class="dropdown-item text-uppercase" href="/personalInfo/<%= paitData._id %>">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
                 </ul>
             </div>
             </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
+      -->
       </nav><!-- .navbar -->
 
-      <a href="./booking/index.html" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+      <a href="/paitentList/<%= docID %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Quay lại danh sách </a>
 
     </div>
   </header><!-- End Header -->
@@ -76,36 +77,38 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
+
       <div class="container">
         <h1 class="text-uppercase" style="margin-bottom: 24px;" align="center"> Hồ Sơ Bệnh Án </h1>
 
         <div class="row my-2">
           <div class="col col-md-6">
-            <h5>Họ và Tên: Gumball Watterson</h5>        
+            <h5>Họ và Tên: <%= paitData.Info.name %></h5>        
           </div>
 
           <div class="col col-md-6">
-            <h5>Số Điện Thoại: 123 456 7890</h5>
+            <h5>Số Điện Thoại: <%= paitData.Info.phoneNum %></h5>
           </div>          
         </div>  
         
         <div class="row my-2">
           <div class="col col-md-6">
-            <h5>Ngày Sinh: dd/mm/yyyy</h5>            
+            <h5>Ngày Sinh: <%= paitData.Info.dayOfbirth %></h5>            
           </div>
 
           <div class="col col-md-6">
-            <h5>Giới Tính: Non-binary</h5>
+            <h5>Giới Tính: <%= paitData.Info.gender %></h5>
           </div>
         </div>
 
         <div class="row my-2">
           <div class="col col-md-6">
-            <h5>Nghề Nghiệp: Sinh Viên BK</h5>
+            <h5>Nghề Nghiệp: <%= paitData.Info.career %></h5>
           </div>
         </div>
       </div>
 
+      
       <div class="container border border-black">
         <div class="row">
           <div class="col m-4">
@@ -130,7 +133,41 @@
           </div>
         </div>
 
-        <div class="row">
+        <%for(var i = 0; i < paitData.conditionProgress.length; i++){ %>
+          
+          
+            <div class="row">
+              <div class="col m-4">
+                
+                <h6>Ngày: <%=paitData.conditionProgress[i].dayInfo.time%></h6>
+                <h6>Triệu chứng: <%=paitData.conditionProgress[i].dayInfo.symptom%></h6>
+                <h6>Chẩn đoán:<%=paitData.conditionProgress[i].dayInfo.guess%></h6>
+                <h6>Toa thuốc: </h6>
+                
+                <div class="row">
+                  
+                  <div class="col col-md-3"></div>
+                  <% for(var j = 0; j < paitData.conditionProgress[i].dayInfo.medicine.length; j++){ %>
+                  <div class="col col-md-3">
+                    <h6 style="tab-size: 2;"><%=(j + 1)%>. <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineName%></h6>
+                  </div>
+    
+                  <div class="col col-md-3">
+                    <h6><%=paitData.conditionProgress[i].dayInfo.medicine[j].quantity%> <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineUnit%></h6>
+                  </div>
+    
+                  <div class="col col-md-3">
+                    <h6><%=paitData.conditionProgress[i].dayInfo.medicine[j].comment%></h6>
+                  </div>
+                  <% } %>
+                </div>
+                
+              </div>
+              </div>
+          
+            <% } %>
+
+        <!--<div class="row">
           <div class="col m-4">
             <h6>Ngày: dd/mm/yyyy</h6>
             <h6>Triệu chứng: tức ngực, khó thở, nhức đầu</h6>
@@ -174,7 +211,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
 

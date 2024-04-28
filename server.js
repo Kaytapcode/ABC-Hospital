@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const now = new Date();
 
 mongoose.connect("mongodb+srv://khanhpear:123@cluster0.rzo0p3f.mongodb.net/hospital?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
 
@@ -35,6 +36,39 @@ const PaitentSchema = {
         career: String,
         typeOfdisease: String,
         doctorComment: String
+    },
+    paitCode: {type: String, unique: true},
+    conditionProgress: [{
+        dayInfo: {
+            time: String,
+            symptom: String,
+            guess: String,
+            medicine:[{
+                medicineName: String,
+                medicineUnit: String,
+                quantity: Number,
+                comment: String
+            }]
+        }
+    }]
+}
+
+const DrugSchema = {
+    name: String,
+    quantity: Number,
+    unit: String,
+    symptomUsed: String,
+    available: Boolean
+}
+
+const ItemSchema = {
+    name: String,
+    Info: {
+        id: String,
+        type: String,
+        manufacture: String,
+        condition: String,
+        maintainancePeriod: String
     }
 }
 
@@ -217,6 +251,9 @@ let Doc1 = new Doctor("KhanhPear3107", "hello123", "lekhanh98777@gmail.com", doc
 
 const Doctors = mongoose.model("Doctor", new mongoose.Schema(DoctorSchema));
 const Paitents = mongoose.model("Paitent", new mongoose.Schema(PaitentSchema));
+const Drugs = mongoose.model("drug", new mongoose.Schema(DrugSchema));
+const Items = mongoose.model("item", new mongoose.Schema(ItemSchema));
+
 
 const newPaitent = new Paitents({
     loginName: "Supreme3byte",
@@ -231,10 +268,9 @@ const newPaitent = new Paitents({
         career: "SVBK",
         typeOfdisease: "Hoang tưởng cấp độ năng",
         doctorComment: "Cần ít tự ái lại"
-    }
+    },
+    conditionProgress: []
 });
-
-
 
 const newDoctor = new Doctors({
     loginName: Doc1.LoginName,
@@ -252,8 +288,66 @@ const newDoctor = new Doctors({
     }
 });
 
-//newDoctor.save(); //đừng có ấn vô đây ha
-//newPaitent.save();
+const newDrug1 = new Drugs({
+    name: "Paracetamol",
+    quantity: 1000,
+    unit: "Viên",
+    symptomUsed: "đau đầu",
+    available: true
+})
+
+const newDrug2 = new Drugs({
+    name: "Alexan",
+    quantity: 1000,
+    unit: "Hộp",
+    symptomUsed: "đau khớp",
+    available: true
+})
+
+const newDrug3 = new Drugs({
+    name: "Motilum M",
+    quantity: 1000,
+    unit: "Viên",
+    symptomUsed: "đau dạ dày",
+    available: true
+})
+
+const newDrug4 = new Drugs({
+    name: "Smecta",
+    quantity: 1000,
+    unit: "Hộp",
+    symptomUsed: "bị tiêu chảy",
+    available: true
+})
+
+const newDrug5 = new Drugs({
+    name: "Mỡ Eurax",
+    quantity: 1000,
+    unit: "Tuýp",
+    symptomUsed: "chữa ghẻ",
+    available: true
+})
+
+const newDrug6 = new Drugs({
+    name: "Oxy già",
+    quantity: 1000,
+    unit: "Chai",
+    symptomUsed: "chữa ghẻ",
+    available: true
+})
+
+const newDrug7 = new Drugs({
+    name: "Nước muối sinh lý",
+    quantity: 1000,
+    unit: "Chai",
+    symptomUsed: "chữa ghẻ",
+    available: true
+})
+
+// const arr = [newDrug1, newDrug2, newDrug3, newDrug4, newDrug5, newDrug6, newDrug7]
+// Drugs.insertMany(arr);
+// newDoctor.save(); //đừng có ấn vô đây ha
+// newPaitent.save();
 
 const app = express();
 
@@ -277,7 +371,7 @@ app.get("/", function(req, res){
 
 app.get("/login", function(req, res){
     res.render("login", {checkpait1: true, checkpait2: true, message: ""});
-})
+});
 
 app.post("/login", function(req, res){
     let docloginname = req.body.inputMsnv1;
@@ -391,23 +485,94 @@ app.post("/docAcc/:DocID", function(req, res){
 });
 //----------------------------------------------------------//
 
-app.get("/lookup", function(req, res){
-    res.render("paitent_lookup");
+//paitentList sẽ truyền đến phần theo dõi bệnh nhân của bác sĩ để xem thông tin của những bệnh nhân bác sĩ đó quản lý
+app.get("/paitentList/:DocID", async function(req, res){
+    let ID = (req.params.DocID);
+    let doctorObj = await Doctors.findOne({_id: ID});
+    let paitList = [];
+
+    // let checkID = doctorObj.listOfPaitent[0];
+    // let obj = await Paitents.findOne({_id: checkID});
+    // console.log(obj.loginName);
+    
+    for(let i = 0; i < doctorObj.listOfPaitent.length; i++){
+        let checkID = doctorObj.listOfPaitent[i];
+        let obj = await Paitents.findOne({_id: checkID});
+        //console.log(obj);
+        paitList.push(obj);
+    }
+    res.render("paitent_list", {data: doctorObj, list: paitList});
+    
 });
 
-//paitentList sẽ truyền đến phần theo dõi bệnh nhân của bác sĩ
-app.get("/paitentList/:DocID", function(req, res){
+
+//paitentLookup sẽ truy cập đến 1 hồ sơ bệnh nhân cụ thể 
+app.get("/paitentLookup/:DocID/:PaitID",  function(req, res){
+    let docID = (req.params.DocID);
+    let paitID = (req.params.PaitID);
+    //const paitent =  await Paitents.findOne({_id: paitID});
+    //await Drugs.find({}, )
+    
+    Paitents.findOne({_id: paitID}, function(err, paitData){
+        res.render("paitent_lookup", { paitData: paitData, docID: docID});
+    })
+    
+});
+
+//checkup sẽ đi tới chỗ kê đơn của bác sĩ cho một bệnh nhân
+app.get("/checkUp/:DocID", function(req, res){
     let ID = (req.params.DocID);
     Doctors.findOne({_id: ID}, function(err, doctorData){
-        res.render("paitent_list", {data: doctorData});
+        res.render("doctorCheckup", {data: doctorData});
     })
+});
+
+//post checkup (kê đơn) ở đây sẽ giúp cập nhật thêm 1 chuẩn đoán và lưu vào lịch sử khám của bệnh nhân
+app.post("/checkUp/:DocID", async function(req, res){
+    let ID = (req.params.DocID);
+    //let name = req.body.name_ke_don;
+    let code = req.body.number_ke_don;
+    let symptom = req.body.trieu_chung_ke_don;
+    let guess = req.body.chan_doan_ke_don;
+    let item = []; //for(let i = 0; i < 5; i++){item.push(req.body.select_may_moc_i);}
+    let medicine = [];
+
+    for(let i = 1; i <= 5; i++){
+        let drugName = req.body["select_thuoc_" + i]
+        if(drugName !== "Chọn Thuốc:"){
+            const medic = { 
+                medicineName: drugName,
+                medicineUnit: (await Drugs.findOne({name: drugName})).unit,
+                quantity: 5,
+                comment: "mỗi buổi sáng dùng 1 lần"
+            }
+            medicine.push(medic);
+
+            await Drugs.findOneAndUpdate({name: drugName}, {$inc: {quantity: -medic.quantity}});
+        }
+    }
+
+    const progress = {
+        dayInfo: {
+            time: now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear() + " - " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds(),
+            symptom: symptom,
+            guess: guess,
+            medicine: medicine
+        }
+    }
+    
+    const updatePait = await Paitents.findOneAndUpdate({paitCode: code},{$push: {conditionProgress: progress}, $set: {'Info.typeOfdisease': symptom, 'Info.doctorComment': guess}});
+    //console.log(updatePait); 
+    res.redirect("/paitentLookup/" + ID + "/" + updatePait._id);
 });
 
 //medicine sẽ truyền đến kho thuốc - kho thuốc này dùng chung cho mọi bác sĩ
 app.get("/medicineStorage/:DocID", function(req, res){
     let ID = (req.params.DocID);
     Doctors.findOne({_id: ID}, function(err, doctorData){
-        res.render("medicine", {data: doctorData});
+        Drugs.find({}, function(err, druglist){
+            res.render("medicine", {data: doctorData, list: druglist});
+        })
     })
 });
 
@@ -421,9 +586,6 @@ app.get("/equipment/:DocID", function(req, res){
 
 //Tài khoản của bệnh nhân quản lý ở đây-----------------------------------------//
 
-// app.get("/paitentAccount", function(req, res){
-//     res.render("paitentAccount");
-// });
 
 //guestAcc sẽ giúp ta đến với trang chủ chính của bênh nhân khi đăng nhập
 app.get("/guestAcc/:GuestID", function(req, res){
@@ -489,6 +651,15 @@ app.post("/personalInfo/:GuestID", async function(req, res){
     //     //res.render("paitentInfo", {data: paitentData});
     //     res.redirect("/personalInfo/" + paitentData._id);
     // })
+});
+
+app.get("/paitentProfile/:GuestID", function(req, res){
+    let paitID = (req.params.GuestID);
+    
+    Paitents.findOne({_id: paitID}, function(err, data){
+        res.render("paitent_profile", { data: data});
+    })
+    
 });
 
 //hàm này giúp bệnh nhân kiểm tra thông tin của bác sĩ

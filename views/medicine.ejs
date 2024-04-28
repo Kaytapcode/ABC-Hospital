@@ -53,7 +53,7 @@
             <li><a class="nav-link scrollto fw-bold text-uppercase" href="./gieo_ca.html">Gieo Ca</a></li>          
             <li>            
                 <div class="dropdown">
-                    <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="./ke_don.html">Kê Đơn</a>
+                    <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="/checkup/<%= data._id %>">Kê Đơn</a>
                     <ul class="dropdown-menu">
                     <li><a class="dropdown-item text-uppercase" href="/medicineStorage/<%= data._id %>">Thuốc</a></li>
                     <li><a class="dropdown-item active text-uppercase" href="/equipment/<%= data._id %>">Trang Thiết Bị</a></li>
@@ -90,11 +90,13 @@
                 </tr>
                 
                 <!-- đặt vòng for ở đây -->
+                <% for(var i = 0 ; i < list.length; i++){ %>
                 <tr>
-                    <td class="text-capitalize border border-black text-center">Paracetamol</td>
-                    <td class="text-capitalize border border-black text-center">5</td>
-                    <td class="text-capitalize border border-black text-center">viên</td>
+                    <td class="text-capitalize border border-black text-center"><%=list[i].name %></td>
+                    <td class="text-capitalize border border-black text-center"><%=list[i].quantity %></td>
+                    <td class="text-capitalize border border-black text-center"><%=list[i].unit %></td>
                 </tr>
+                <% } %>
             </table>
           </div>
         </form>
