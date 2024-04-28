@@ -21,167 +21,185 @@ const DoctorSchema = {
     }
 }
 
-class Information{
-    constructor(name, age, gender){
-        this.Name = name;
-        this.Age = age;
-        this.Gender = gender;
-    }
 
-    set Age(age){
-        this._age = age;
-    }
+// class Information{
+//     constructor(name, age, gender){
+//         this.Name = name;
+//         this.Age = age;
+//         this.Gender = gender;
+//     }
 
-    get Age(){return this._age};
+//     set Age(age){
+//         this._age = age;
+//     }
 
-    set Name(name){
-        this._name = name;
-    }
+//     get Age(){return this._age};
 
-    get Name(){return this._name};
+//     set Name(name){
+//         this._name = name;
+//     }
 
-    set Gender(gender){
-        this._gender = gender;
-    }
+//     get Name(){return this._name};
 
-    get Gender(){return this._gender};
-}
+//     set Gender(gender){
+//         this._gender = gender;
+//     }
 
-class DoctorInfo extends Information{
-    constructor(name, age, gender, comment, experience, specialized, degree, image){
-        super(name, age, gender);
-        this.Comment = comment;
-        this.Experience = experience;
-        this.Specialized = specialized;
-        this.Degree = degree;
-        this.Image = image;
-    }
+//     get Gender(){return this._gender};
+// }
 
-    set Comment(comment){
-        this._comment = comment;
-    }
+// class DoctorInfo extends Information{
+//     constructor(name, age, gender, comment, experience, specialized, degree, image){
+//         super(name, age, gender);
+//         this.Comment = comment;
+//         this.Experience = experience;
+//         this.Specialized = specialized;
+//         this.Degree = degree;
+//         this.Image = image;
+//     }
 
-    get Comment(){return this._comment};
+//     set Comment(comment){
+//         this._comment = comment;
+//     }
 
-    set Experience(experience){
-        this._experience = experience;
-    }
+//     get Comment(){return this._comment};
 
-    get Experience(){return this._experience};
+//     set Experience(experience){
+//         this._experience = experience;
+//     }
 
-    set Specialized(specialized){
-        this._specialized = specialized;
-    }
+//     get Experience(){return this._experience};
 
-    get Specialized(){return this._specialized};
+//     set Specialized(specialized){
+//         this._specialized = specialized;
+//     }
 
-    set Degree(degree){
-        this._degree = degree;
-    }
+//     get Specialized(){return this._specialized};
 
-    get Degree(){return this._degree};
+//     set Degree(degree){
+//         this._degree = degree;
+//     }
 
-    set Image(image){
-        this._image = image;
-    }
+//     get Degree(){return this._degree};
 
-    get Image(){return this._image};
-}
+//     set Image(image){
+//         this._image = image;
+//     }
 
-class PaitenceInfo extends Information{
+//     get Image(){return this._image};
+// }
 
-    constructor(name, age, gender, disease){
-        super(name, age, gender);
-        this.Disease = disease; 
-    }
+// class PaitenceInfo extends Information{
 
-    set Disease(disease){
-        this._disease = disease;
-    }
+//     constructor(name, age, gender, disease){
+//         super(name, age, gender);
+//         this.Disease = disease; 
+//     }
 
-    get Disease(){return this._disease};
+//     set Disease(disease){
+//         this._disease = disease;
+//     }
 
-}
+//     get Disease(){return this._disease};
 
-class Person{
-    constructor(loginName, password, email){
-        this.LoginName = loginName;
-        this.Password = password;
-        this.Email = email;
-    }
+// }
 
-    set LoginName(loginName){
-        this._loginName = loginName;
-    }
+// class Person{
+//     constructor(loginName, password, email){
+//         this.LoginName = loginName;
+//         this.Password = password;
+//         this.Email = email;
+//     }
 
-    get LoginName(){return this._loginName};
+//     set LoginName(loginName){
+//         this._loginName = loginName;
+//     }
 
-    set Password(password){
-        this._password = password;
-    }
+//     get LoginName(){return this._loginName};
 
-    get Password(){return this._password};
+//     set Password(password){
+//         this._password = password;
+//     }
 
-    set Email(email){
-        this._email = email;
-    }
+//     get Password(){return this._password};
 
-    get Email(){return this._email};
+//     set Email(email){
+//         this._email = email;
+//     }
 
-}
+//     get Email(){return this._email};
 
-class Doctor extends Person{
-    constructor(loginName, password, email, docInfo){
-        super(loginName, password, email);
-        this.DocInfo = docInfo;
-    }
+// }
 
-    set DocInfo(docInfo){
-        this._docInfo = docInfo;
-    }
+// class Doctor extends Person{
+//     constructor(loginName, password, email, docInfo){
+//         super(loginName, password, email);
+//         this.DocInfo = docInfo;
+//     }
 
-    get DocInfo(){return this._docInfo};
-}
+//     set DocInfo(docInfo){
+//         this._docInfo = docInfo;
+//     }
 
-class Paitence extends Person{
+//     get DocInfo(){return this._docInfo};
+// }
 
-}
+// class Paitence extends Person{
 
-const info = new Information("Le Nguyen Nam Khanh", "25", "male");
+// }
 
-docInfo = new DoctorInfo(
-    info.Name,
-    info.Age,
-    info.Gender,
-    "he is very capable",
-    "Has been working in the company about 4 years",
-    "very capable at doing heart disaese",
-    "Has a degree from ABC university",
-    "image-1.jpg"
-)
+// const info = new Information("Le Nguyen Nam Khanh", "25", "male");
 
-let Doc1 = new Doctor("KhanhPear3107", "hello123", "lekhanh98777@gmail.com", docInfo);
+// docInfo = new DoctorInfo(
+//     info.Name,
+//     info.Age,
+//     info.Gender,
+//     "he is very capable",
+//     "Has been working in the company about 4 years",
+//     "very capable at doing heart disaese",
+//     "Has a degree from ABC university",
+//     "image-1.jpg"
+// )
+
+// let Doc1 = new Doctor("KhanhPear3107", "hello123", "lekhanh98777@gmail.com", docInfo);
 
 const Doctors = mongoose.model("Doctor", new mongoose.Schema(DoctorSchema));
 
-const newDoctor = new Doctors({
-    loginName: Doc1.LoginName,
-    password: Doc1.Password,
-    email: Doc1.Email,
-    Info: {
-        name: Doc1.DocInfo.Name,
-        age: Doc1.DocInfo.Age,
-        gender: Doc1.DocInfo.Gender,
-        comment: Doc1.DocInfo.Comment,
-        experience: Doc1.DocInfo.Experience,
-        specialized: Doc1.DocInfo.Specialized,
-        degree: Doc1.DocInfo.Degree,
-        image: Doc1.DocInfo.Image
-    }
-});
+// const newDoctor = new Doctors({
+//     loginName: Doc1.LoginName,
+//     password: Doc1.Password,
+//     email: Doc1.Email,
+//     Info: {
+//         name: Doc1.DocInfo.Name,
+//         age: Doc1.DocInfo.Age,
+//         gender: Doc1.DocInfo.Gender,
+//         comment: Doc1.DocInfo.Comment,
+//         experience: Doc1.DocInfo.Experience,
+//         specialized: Doc1.DocInfo.Specialized,
+//         degree: Doc1.DocInfo.Degree,
+//         image: Doc1.DocInfo.Image
+//     }
+// });
 
 //newDoctor.save(); //đừng có ấn vô đây ha
-
+const ToolSchema = new mongoose.Schema({
+    name: String,
+    information: {
+      id: String,
+      condition: String,
+      last_maintenance_date: Date,
+      next_maintenance_date: Date
+    }
+  });
+const Tools = mongoose.model('Tools', new mongoose.Schema(ToolSchema));
+async function getToolById() {
+    const tool1 = await Tools.findById("662159c3adead55eef79053b");
+    console.log(tool1); // You can do something with tool1 here
+  }
+  
+  // Call the asynchronous function
+  getToolById();
+  
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -193,7 +211,15 @@ app.use(express.static("assets"));
 app.use(express.static("benh_nhan"));
 app.use(express.static("forms"));
 app.use(express.static("login_signup"));
-
+app.use(express.static("tools"));
+// Phần quản lý trang thiết bị-----------------------------------------//
+app.get("/tools", function(req, res){
+    res.render("tools");
+});
+app.post("/tools", function(req, res){
+    let stat1 = req.body.update_tinh_trang_thiet_bi_1;
+    if(stat1 === )
+});
 //Phần HOMEPAGE (đăng nhập và đăng kí)---------------------------------------------//
 
 app.get("/", function(req, res){
@@ -204,6 +230,7 @@ app.get("/", function(req, res){
 
 app.get("/login", function(req, res){
     res.render("login");
+    
 })
 
 app.post("/login", function(req, res){
