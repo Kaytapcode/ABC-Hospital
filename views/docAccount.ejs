@@ -49,17 +49,17 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="http://localhost:5500/docAcc/<%= data._id %>">Home</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/docAcc/<%= data._id %>">Home</a></li>
           <li><a class="nav-link scrollto fw-bold text-uppercase" href="giao_ca.html">Giao ca</a></li>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="theo_doi_benh_nhan.html">Theo dõi bệnh nhân</a></li>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="quan_ly_benh_an.html">Quản lý bệnh án</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/paitentList/<%= data._id %>">Theo dõi bệnh nhân</a></li>
+          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/paitentList/<%= data._id %>">Quản lý bệnh án</a></li>
           <li>            
             <div class="dropdown">
                 <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="#">Kê đơn</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item text-uppercase align-items-center" href="./ke_don.html">Kê đơn</a></li>
-                  <li><a class="dropdown-item text-uppercase align-items-center" href="./thuoc.html">Thuốc</a></li>
-                  <li><a class="dropdown-item text-uppercase align-items-center" href="./thiet_bi.html">Trang thiết bị</a></li>
+                  <li><a class="dropdown-item text-uppercase align-items-center" href="/checkup/<%= data._id %>">Kê đơn</a></li>
+                  <li><a class="dropdown-item text-uppercase align-items-center" href="/medicineStorage/<%= data._id %>">Thuốc</a></li>
+                  <li><a class="dropdown-item text-uppercase align-items-center" href="/equipment/<%= data._id %>">Trang thiết bị</a></li>
                 </ul>
             </div>
             </li>

@@ -58,8 +58,8 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="./login" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
-      <a href="./signup" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
+      <a href="/login" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Nhập </a>
+      <a href="/signup" class="appointment-btn scrollto text-decoration-none fw-bold"> Đăng Ký </a>
 
     </div>
   </header><!-- End Header -->
@@ -104,6 +104,13 @@
                     <input type="checkbox" class="form-check-input" id="check1" name="check1">
                     <label class="form-check-label" for="check1">Kiểm Tra Tôi</label>
                   </div>
+
+                    <%if(checkpait1===false) {%>
+                    <div class="alert alert-danger" role="alert", >
+                      <%= message %>
+                    </div>
+                    <%}%>
+
                   <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Nhân Viên Đăng Nhập</button>
                 </form>
               </div>
@@ -116,9 +123,9 @@
             <div class="row">
               <div class="col col-md-1"></div>
               <div class="col col-md-10">
-                <form method="post" action="../forms/login.php">
+                <form method="post" action="/login">
                   <div class="mb-3">
-                    <label for="inputPhoneNumber" class="form-label"> Số Điện Thoại <nobr style="color: red;">*</nobr></label>
+                    <label for="inputPhoneNumber" class="form-label"> Tài Khoản <nobr style="color: red;">*</nobr></label>
                     <input type="text" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber">
                   </div>
                   <div class="mb-3">
@@ -129,6 +136,13 @@
                     <input type="checkbox" class="form-check-input" id="check2" name="check2">
                     <label class="form-check-label" for="check2">Kiểm Tra Tôi</label>
                   </div>
+          
+                  <%if(checkpait2===false) {%>
+                  <div class="alert alert-danger" role="alert", >
+                    <%= message %>
+                  </div>
+                  <%}%>
+
                   <button type="submit" class="btn btn-primary" style="width: auto;" align="center">Bệnh Nhân Đăng Nhập</button>
                 </form>
               </div>

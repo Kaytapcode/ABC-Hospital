@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title> Home </title>
+  <title> Hồ Sơ Bệnh Án </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <link href="/img/favicon.png" rel="icon">
@@ -48,88 +48,173 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active fw-bold text-uppercase" href="/guestAcc/<%= data._id %>">Home</a></li>
-            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/doctorlist/<%= data._id %>">Thông Tin Bác Sĩ</a></li>          
+          <!--<li><a class="nav-link scrollto fw-bold text-uppercase" href="/guestAcc/<%= paitData._id%>">Home</a></li>
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/doctor/<%= paitData._id %>">Thông Tin Bác Sĩ</a></li>          
           <li>            
             <div class="dropdown">
-                <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="#">Thông Tin Cá Nhân</a>
+                <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle active" href="#">Thông Tin Cá Nhân</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item text-uppercase" href="/paitentProfile/<%= data._id %>">Hồ Sơ Bệnh Án</a></li>
-                  <li><a class="dropdown-item text-uppercase" href="/personalInfo/<%= data._id %>">Thông Tin Cá Nhân</a></li>
+                  <li><a class="dropdown-item text-uppercase active" href="./ho_so_benh_an.html">Hồ Sơ Bệnh Án</a></li>
+                  <li><a class="dropdown-item text-uppercase" href="/personalInfo/<%= paitData._id %>">Chỉnh Sửa Thông Tin Cá Nhân</a></li>
                 </ul>
             </div>
             </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
+      -->
       </nav><!-- .navbar -->
 
-      <a href="../booking/<%= data._id %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+      <a href="/paitentList/<%= docID %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Quay lại danh sách </a>
 
     </div>
   </header><!-- End Header -->
 
   <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      
+    </section><!-- End Breadcrumbs Section -->
+
     <section class="inner-page">
-        <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/img/about.jpg" class="d-block w-100" height="800" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 style="color: rgb(20, 191, 194);">“Cứu chữa bệnh nhân là sứ mệnh của chúng tôi”</h1>
-                        <p style="color: rgb(20, 191, 194);">_Trưởng khoa thần kinh Jack Sparrow_</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+      <div class="container">
+        <h1 class="text-uppercase" style="margin-bottom: 24px;" align="center"> Hồ Sơ Bệnh Án </h1>
+
+        <div class="row my-2">
+          <div class="col col-md-6">
+            <h5>Họ và Tên: <%= paitData.Info.name %></h5>        
+          </div>
+
+          <div class="col col-md-6">
+            <h5>Số Điện Thoại: <%= paitData.Info.phoneNum %></h5>
+          </div>          
+        </div>  
         
-        <div class="container-fluid m-4">
-            <div class="row flex-row flex-nowrap overflow-auto">
-                <div class="col col-4">
-                    <div class="card card-block" style="width: 18rem;">
-                        <img src="/img/doctors/doctors-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <nobr class="fw-bold">Giám Đốc Y Tế Walter White </nobr> - Lãnh đạo uyên bác, tận tâm và có kiến thức sâu rộng về lĩnh vực y tế.
-                            </p>
-                        </div>
-                    </div>    
-                </div>
+        <div class="row my-2">
+          <div class="col col-md-6">
+            <h5>Ngày Sinh: <%= paitData.Info.dayOfbirth %></h5>            
+          </div>
 
-                <div class="col col-4">
-                    <div class="card card-block" style="width: 18rem;">
-                        <img src="/img/doctors/doctors-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <nobr class="fw-bold">Bác Sĩ Gây Mê Sarah Jhonson</nobr> - Chuyên gia an toàn, kỹ thuật và chăm sóc sức khỏe trong quá trình phẫu thuật.
-                            </p>
-                        </div>
-                    </div>    
-                </div>
+          <div class="col col-md-6">
+            <h5>Giới Tính: <%= paitData.Info.gender %></h5>
+          </div>
+        </div>
 
-                <div class="col col-4">
-                    <div class="card card-block" style="width: 18rem;">
-                        <img src="/img/doctors/doctors-3.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <nobr class="fw-bold">Bác Sĩ Tim Mạch William Anderson</nobr> - Chuyên gia tận tâm, giàu kinh nghiệm trong chẩn đoán và điều trị các vấn đề về tim mạch.
-                            </p>
-                        </div>
-                    </div>    
-                </div>
+        <div class="row my-2">
+          <div class="col col-md-6">
+            <h5>Nghề Nghiệp: <%= paitData.Info.career %></h5>
+          </div>
+        </div>
+      </div>
 
-                <div class="col col-4">
-                    <div class="card card-block" style="width: 18rem;">
-                        <img src="/img/doctors/doctors-4.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <nobr class="fw-bold">Bác Sĩ Giải Phẫu Thần Kinh<br> Amanda Jepson</nobr> - Chuyên gia hiểu biết sâu sắc về hệ thống thần kinh và kỹ thuật phẫu thuật.
-                            </p>
-                        </div>
-                    </div>    
-                </div>
+      
+      <div class="container border border-black">
+        <div class="row">
+          <div class="col m-4">
+            <h6>Ngày: dd/mm/yyyy</h6>
+            <h6>Triệu chứng: tức ngực, khó thở, nhức đầu</h6>
+            <h6>Chẩn đoán: cảm nắng crush</h6>
+            <h6>Toa thuốc: </h6>
+            <div class="row">
+              <div class="col col-md-3"></div>
+              <div class="col col-md-3">
+                <h6 style="tab-size: 2;">1. Paracetamol</h6>
+              </div>
+
+              <div class="col col-md-3">
+                <h6>5 viên</h6>
+              </div>
+
+              <div class="col col-md-3">
+                <h6>1 viên (sau ăn sáng)</h6>
+              </div>
             </div>
-        </div>    
+          </div>
+        </div>
+
+        <%for(var i = 0; i < paitData.conditionProgress.length; i++){ %>
+          
+          
+            <div class="row">
+              <div class="col m-4">
+                
+                <h6>Ngày: <%=paitData.conditionProgress[i].dayInfo.time%></h6>
+                <h6>Triệu chứng: <%=paitData.conditionProgress[i].dayInfo.symptom%></h6>
+                <h6>Chẩn đoán:<%=paitData.conditionProgress[i].dayInfo.guess%></h6>
+                <h6>Toa thuốc: </h6>
+                
+                <div class="row">
+                  
+                  <div class="col col-md-3"></div>
+                  <% for(var j = 0; j < paitData.conditionProgress[i].dayInfo.medicine.length; j++){ %>
+                  <div class="col col-md-3">
+                    <h6 style="tab-size: 2;"><%=(j + 1)%>. <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineName%></h6>
+                  </div>
+    
+                  <div class="col col-md-3">
+                    <h6><%=paitData.conditionProgress[i].dayInfo.medicine[j].quantity%> <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineUnit%></h6>
+                  </div>
+    
+                  <div class="col col-md-3">
+                    <h6><%=paitData.conditionProgress[i].dayInfo.medicine[j].comment%></h6>
+                  </div>
+                  <% } %>
+                </div>
+                
+              </div>
+              </div>
+          
+            <% } %>
+
+        <!--<div class="row">
+          <div class="col m-4">
+            <h6>Ngày: dd/mm/yyyy</h6>
+            <h6>Triệu chứng: tức ngực, khó thở, nhức đầu</h6>
+            <h6>Chẩn đoán: cảm nắng crush</h6>
+            <h6>Toa thuốc: </h6>
+            <div class="row">
+              <div class="col col-md-3"></div>
+              <div class="col col-md-3">
+                <h6 style="tab-size: 2;">1. Paracetamol</h6>
+              </div>
+
+              <div class="col col-md-3">
+                <h6>5 viên</h6>
+              </div>
+
+              <div class="col col-md-3">
+                <h6>1 viên (sau ăn sáng)</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col m-4">
+            <h6>Ngày: dd/mm/yyyy</h6>
+            <h6>Triệu chứng: tức ngực, khó thở, nhức đầu</h6>
+            <h6>Chẩn đoán: cảm nắng crush</h6>
+            <h6>Toa thuốc: </h6>
+            <div class="row">
+              <div class="col col-md-3"></div>
+              <div class="col col-md-3">
+                <h6 style="tab-size: 2;">1. Paracetamol</h6>
+              </div>
+
+              <div class="col col-md-3">
+                <h6>5 viên</h6>
+              </div>
+
+              <div class="col col-md-3">
+                <h6>1 viên (sau ăn sáng)</h6>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
     </section>
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
