@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
 const now = new Date();
 
 mongoose.connect("mongodb+srv://khanhpear:123@cluster0.rzo0p3f.mongodb.net/hospital?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
@@ -20,13 +21,19 @@ const DoctorSchema = {
         degree: String,
         image: String
     },
-    listOfPaitent: []
+    listOfPaitent: [{
+        paitentID: String,
+        bookingDay: String
+    }]
 }
+
+const Doctors = mongoose.model("Doctor", new mongoose.Schema(DoctorSchema));
 
 const PaitentSchema = {
     loginName: { type: String, unique: true },
     password: String,
     email: String,
+    currentDoctor: { type: Object, default: undefined },
     Info: {
         name: String,
         age: Number,
@@ -53,6 +60,8 @@ const PaitentSchema = {
     }]
 }
 
+const Paitents = mongoose.model("Paitent", new mongoose.Schema(PaitentSchema));
+
 const DrugSchema = {
     name: String,
     quantity: Number,
@@ -60,6 +69,8 @@ const DrugSchema = {
     symptomUsed: String,
     available: Boolean
 }
+
+const Drugs = mongoose.model("drug", new mongoose.Schema(DrugSchema));
 
 const ItemSchema = {
     name: String,
@@ -236,7 +247,7 @@ class Paitence extends Person{
 
 const info = new Information("Le Nguyen Nam Khanh", "25", "male");
 
-docInfo = new DoctorInfo(
+const docInfo = new DoctorInfo(
     info.Name,
     info.Age,
     info.Gender,
@@ -249,11 +260,9 @@ docInfo = new DoctorInfo(
 
 let Doc1 = new Doctor("KhanhPear3107", "hello123", "lekhanh98777@gmail.com", docInfo);
 
-const Doctors = mongoose.model("Doctor", new mongoose.Schema(DoctorSchema));
-const Paitents = mongoose.model("Paitent", new mongoose.Schema(PaitentSchema));
-const Drugs = mongoose.model("drug", new mongoose.Schema(DrugSchema));
 const Items = mongoose.model("item", new mongoose.Schema(ItemSchema));
 
+//console.log(Doctors.findById("661d60fde541367b45a20673"));
 
 const newPaitent = new Paitents({
     loginName: "Supreme3byte",
@@ -354,6 +363,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'booking')]);
+mongoose.set('useFindAndModify', true);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("css"));
@@ -380,6 +390,7 @@ app.post("/login", function(req, res){
     let paitloginname = req.body.inputPhoneNumber;
     let paitpassword = req.body.inputPassword2;
 
+    if(docloginname != undefined){
     Doctors.findOne({loginName: docloginname}, function(err, foundUser){
         if(foundUser){
             //console.log(loginname);
@@ -396,7 +407,9 @@ app.post("/login", function(req, res){
             console.log("didn't found it, please sign up first\n");
         }  
     })
+}
 
+    if(paitloginname !== undefined){
     Paitents.findOne({loginName: paitloginname}, function(err, foundUser){
         if(foundUser){
             //console.log(loginname);
@@ -413,6 +426,7 @@ app.post("/login", function(req, res){
             console.log("didn't found it, please sign up first\n");
         }     
     })
+}
 })
 
 app.get("/signup", function(req, res){
@@ -426,10 +440,28 @@ app.post("/signup", function(req, res){
     let paitEmail = req.body.inputEmail;
     let paitGender = req.body.inputGender;
 
+    //này để tạo ID ngẫu nhiên nhé
+    function generateID() {
+        let result = '';
+        const characters = '0123456789';
+        const length = 7;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
+    const ID = generateID();
+
     const newPait = new Paitents({
         loginName: paitAccountName,
         password: paitPassword,
         email: paitEmail,
+        currentDoctor: {
+            Info: {
+                name: "Chưa có"
+            }
+        },
         Info: {
             name: paitFullName,
             age: 0,
@@ -439,8 +471,12 @@ app.post("/signup", function(req, res){
             career: "",
             typeOfdisease: "",
             doctorComment: ""
-        }
+        },
+        paitCode: ID,
+        conditionProgress: [],
     });
+
+    console.log(newPait);
 
     newPait.save(function(err, savedPait) {
         if (err) {
@@ -456,14 +492,6 @@ app.post("/signup", function(req, res){
     });
     
    //res.render("signup");
-});
-
-app.get("/data", function(req, res){
-    res.render("data");
-})
-
-app.get("/calender", function(req, res){
-    res.render("calender");
 });
 
 //Tài khoản của bác sĩ quản lý ở đây-------------------------------------------//
@@ -497,11 +525,12 @@ app.get("/paitentList/:DocID", async function(req, res){
     // console.log(obj.loginName);
     
     for(let i = 0; i < doctorObj.listOfPaitent.length; i++){
-        let checkID = doctorObj.listOfPaitent[i];
+        let checkID = doctorObj.listOfPaitent[i].paitentID;
         let obj = await Paitents.findOne({_id: checkID});
         //console.log(obj);
         paitList.push(obj);
     }
+
     res.render("paitent_list", {data: doctorObj, list: paitList});
     
 });
@@ -511,8 +540,6 @@ app.get("/paitentList/:DocID", async function(req, res){
 app.get("/paitentLookup/:DocID/:PaitID",  function(req, res){
     let docID = (req.params.DocID);
     let paitID = (req.params.PaitID);
-    //const paitent =  await Paitents.findOne({_id: paitID});
-    //await Drugs.find({}, )
     
     Paitents.findOne({_id: paitID}, function(err, paitData){
         res.render("paitent_lookup", { paitData: paitData, docID: docID});
@@ -646,12 +673,6 @@ app.post("/personalInfo/:GuestID", async function(req, res){
         //console.log(paitentData.Info.gender);
         res.redirect("/personalInfo/" + paitentData._id);
     })
-
-    // Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.name': changedname, 'Info.phoneNum': changedphonenum, 'Info.dayOfbirth': changedDOB, 'Info.gender': changedgender, 'Info.career': changedjob}}, function(err, paitentData){
-    //     console.log(changedjob);
-    //     //res.render("paitentInfo", {data: paitentData});
-    //     res.redirect("/personalInfo/" + paitentData._id);
-    // })
 });
 
 app.get("/paitentProfile/:GuestID", function(req, res){
@@ -660,7 +681,6 @@ app.get("/paitentProfile/:GuestID", function(req, res){
     Paitents.findOne({_id: paitID}, function(err, data){
         res.render("paitent_profile", { paitData: data});
     })
-    
 });
 
 //hàm này giúp bệnh nhân kiểm tra thông tin của bác sĩ
@@ -673,12 +693,50 @@ app.get("/doctorlist/:GuestID", async function(req, res){
     });
 });
 
-app.get("/profile/:DocID", function(req, res){
-    let ID = (req.params.DocID);
-    Doctors.findOne({_id: ID}, function(err, doctor){
-        res.render("profile", {doctor: doctor})
+//Hàm này giúp bệnh nhân truy cập thông tin của Bác sĩ và đặt lịch
+app.get("/profile/:GuestID/:DocID", function(req, res){
+    let docID = (req.params.DocID);
+    let guestID = (req.params.GuestID);
+    Doctors.findOne({_id: docID}, function(err, doctor){
+        res.render("profile", {doctor: doctor, paitData: guestID})
     })
  });
+
+app.post("/profile/:GuestID/:DocID", async function(req, res){
+
+    let docID = (req.params.DocID);
+    let guestID = (req.params.GuestID);
+
+    let bookingDay = req.body.booking;
+    // if (bookingDay instanceof Date) {
+    //     console.log("bookingDay là một đối tượng Date.");
+    //     // Tiếp tục xử lý nếu cần thiết
+    // } else {
+    //     console.log("bookingDay không phải là một đối tượng Date.");
+    //     // Thực hiện xử lý để chuyển đổi hoặc báo lỗi tùy thuộc vào trường hợp
+    // }
+
+    let newpait = {
+        paitentID: guestID,
+        bookingDay: bookingDay
+    }
+
+    const checkExist = await Paitents.findOne({_id : guestID});
+
+    if( checkExist.currentDoctor !== undefined){
+        await Doctors.findOneAndUpdate({_id: checkExist.currentDoctor._id}, {$pull: {listOfPaitent: {paitentID: guestID}} });
+    }
+
+    let doctorIncharge = await Doctors.findOneAndUpdate({_id: docID},{$push: {listOfPaitent: newpait}});
+    await Paitents.findOneAndUpdate({_id: guestID}, {$set: {currentDoctor: doctorIncharge}});
+
+    res.redirect("/profile/" + guestID + "/" + docID);
+    //res.render("profile");
+    // Doctors.findOne({_id: docID}, function(err, doctor){
+    //     res.render("profile", {doctor: doctor, paitData: guestID})
+    // })
+ });
+ //------------------------------------------------------------------------
 
  //Hàm này chính là hàm booking Bác sĩ của bệnh nhân
  app.get("/booking/:GuestID", function(req, res){
@@ -690,7 +748,27 @@ app.get("/profile/:DocID", function(req, res){
     })  
 });
 
+app.post("/booking/:GuestID", async function(req, res){
+    let bookingDay = req.body.input;
+    let pickDoctor = req.body.pick_doctor;
+    let paitID = (req.params.GuestID);
 
+    const paitent = await Paitents.findOne({_id: paitID});
+
+    const newPait = {
+
+    } 
+
+    await Doctors.findOneAndUpdate({name: pickDoctor}, {$push: {listOfPaitent: paitent._id}});
+
+    await Doctors.find({}, function(err, docData){
+        Paitents.findOne({_id: paitID}, function(err, paitData){
+            res.render("booking", { paitData: paitData, docData: docData});
+        })
+    })  
+});
+
+//---------------------------------------------------------------------------
 
 app.listen(5500, function(){
     console.log("server turn on\n");

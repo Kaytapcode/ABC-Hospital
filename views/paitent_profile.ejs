@@ -44,7 +44,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="../index.html" class="text-decoration-none">ABC Hospital</a></h1>
+      <h1 class="logo me-auto"><a href="/" class="text-decoration-none">ABC Hospital</a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -103,11 +103,48 @@
           <div class="col col-md-6">
             <h5>Nghề Nghiệp: <%= paitData.Info.career %></h5>
           </div>
+
+          <div class="col col-md-6">
+            <h5>Bác sĩ hiện tại: <%= paitData.currentDoctor.Info.name %></h5>
+          </div>
         </div>
       </div>
 
       <div class="container border border-black">
-        <div class="row">
+
+        <%for(var i = 0; i < paitData.conditionProgress.length; i++){ %>
+        
+          <div class="row">
+            <div class="col m-4">
+              
+              <h6>Ngày: <%=paitData.conditionProgress[i].dayInfo.time%></h6>
+              <h6>Triệu chứng: <%=paitData.conditionProgress[i].dayInfo.symptom%></h6>
+              <h6>Chẩn đoán:<%=paitData.conditionProgress[i].dayInfo.guess%></h6>
+              <h6>Toa thuốc: </h6>
+              
+              <div class="row">
+                
+                <div class="col col-md-3"></div>
+                <% for(var j = 0; j < paitData.conditionProgress[i].dayInfo.medicine.length; j++){ %>
+                <div class="col col-md-3">
+                  <h6 style="tab-size: 2;"><%=(j + 1)%>. <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineName%></h6>
+                </div>
+  
+                <div class="col col-md-3">
+                  <h6><%=paitData.conditionProgress[i].dayInfo.medicine[j].quantity%> <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineUnit%></h6>
+                </div>
+  
+                <div class="col col-md-3">
+                  <h6><%=paitData.conditionProgress[i].dayInfo.medicine[j].comment%></h6>
+                </div>
+                <% } %>
+              </div>
+              
+            </div>
+            </div>
+        
+          <% } %>
+        <!--<div class="row">
           <div class="col m-4">
             <h6>Ngày: dd/mm/yyyy</h6>
             <h6>Triệu chứng: tức ngực, khó thở, nhức đầu</h6>
@@ -174,7 +211,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </section>
 
