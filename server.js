@@ -566,6 +566,26 @@ app.get("/checkUp/:DocID", function(req, res){
 });
 
 //post checkup (kê đơn) ở đây sẽ giúp cập nhật thêm 1 chuẩn đoán và lưu vào lịch sử khám của bệnh nhân
+async function FindandChange(toolname, status) {
+    try {
+      const tool = await Tools.findOne({name: toolname});
+      if (tool) {
+        if(tool.status === status){
+            console.log("Do nothing");
+        }
+        else {
+            tool.status = status; 
+            await tool.save(); 
+            console.log("Tool updated:", tool);
+        }
+    } else {
+        console.log("Tool not found:", toolname);
+    }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
 app.post("/checkUp/:DocID", async function(req, res){
     let ID = (req.params.DocID);
     //let name = req.body.name_ke_don;
@@ -574,7 +594,7 @@ app.post("/checkUp/:DocID", async function(req, res){
     let guess = req.body.chan_doan_ke_don;
     let item = []; //for(let i = 0; i < 5; i++){item.push(req.body.select_may_moc_i);}
     let medicine = [];
-    
+    let tool = req.body.select_may_moc_1;
     for(let i = 1; i <= 5; i++){
         let drugName = req.body["select_thuoc_" + i]
         if(drugName !== "Chọn Thuốc:"){
@@ -602,8 +622,22 @@ app.post("/checkUp/:DocID", async function(req, res){
             medicine: medicine
         }
     }
-    
+    console.log("Patient code:", code); // Log the patient code to check its value
+
     const updatePait = await Paitents.findOneAndUpdate({paitCode: code},{$push: {conditionProgress: progress}, $set: {'Info.typeOfdisease': symptom, 'Info.doctorComment': guess}});
+    console.log("Updated patient:", updatePait); // Log the updated patient object
+    //Update the status of the selected too
+    const data_tool = await Tools.findOne({name : tool});
+    if(data_tool === "unavailable"){
+        console.log("Cannot select");
+    }
+    else if(data_tool === "maintenance"){
+        console.log("Tool is in maintenance");
+    }
+    else{
+        FindandChange(tool, "unavailable");
+
+    }
     //console.log(updatePait); 
     res.redirect("/paitentLookup/" + ID + "/" + updatePait._id);
 });
