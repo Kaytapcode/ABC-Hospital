@@ -24,6 +24,22 @@
 
 <body>
 
+<script>
+    // Lấy giá trị của thông báo từ query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+
+    // Kiểm tra xem có thông báo nào được truyền từ backend không và hiển thị cửa sổ thông báo
+    if(message === 'success') {
+        
+        function closeAlert() {
+            alert('Bạn đã đăng ký thành công!');
+            document.getElementById('alert').style.display = 'none';
+        }
+        setTimeout(closeAlert, 1000);
+    }
+</script>
+
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">

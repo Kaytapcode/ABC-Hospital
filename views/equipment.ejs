@@ -80,15 +80,15 @@
     <section class="inner-page">
         <h1 align="center" class="text-uppercase"> trang thiết bị </h1>
 
-        <script>
+        <!-- <script>
             $(document).ready(function() {
                 $("#tinh_trang_thiet_bi_1_default").show();
                 $("#modify_option").show();
                 $("#tinh_trang_thiet_bi_1_modify").hide();
                 $("#update_option").hide();
-                $("#thiet_bi_1_round-1").show();
-                $("#thiet_bi_1_round-2").hide();
-                $("#thiet_bi_1_round-3").hide();
+                //$("#thiet_bi_1_round-1").show();
+                //$("#thiet_bi_1_round-2").hide();
+                //$("#thiet_bi_1_round-3").hide();
 
                 $("#modify_option").click(function() {
                     $("#tinh_trang_thiet_bi_1_default").hide();
@@ -97,44 +97,79 @@
                     $("#update_option").show();
                 });                
             });
-        </script>
+        </script> -->
+
+        <% for(var i = 0; i < list.length; i++){ %>
+          <script>
+              $(document).ready(function() {
+                  $("#tinh_trang_thiet_bi_<%= i %>_default").show();
+                  $("#modify_option_<%= i %>").show();
+                  $("#tinh_trang_thiet_bi_<%= i %>_modify").hide();
+                  $("#update_option_<%= i %>").hide();
+      
+                  $("#modify_option_<%= i %>").click(function() {
+                      $("#tinh_trang_thiet_bi_<%= i %>_default").hide();
+                      $("#modify_option_<%= i %>").hide();
+                      $("#tinh_trang_thiet_bi_<%= i %>_modify").show();
+                      $("#update_option_<%= i %>").show();
+                  });                
+              });
+          </script>
+      <% } %>
         
-        <form action="" method="POST">
+        <form action="/equipment/<%= data._id %>" method="POST">
           <div class="container">
             <div class="row">
                 <div class="col col-md-8">
                     <table class="table">
+                      <!---->
                         <tr align="center" class="border border-2">
                             <th scope="col" class="border border-2 text-capitalize">Tên máy/thiết bị</th>
                             <th scope="col" class="border border-2 text-capitalize">tình trạng</th>
                             <th scope="col" class="border border-2 text-capitalize">Điều chỉnh</th>
-                        </tr>                        
-
+                        </tr> 
+                        
+                        <% for(var i = 0; i < list.length; i++){ %>
+                        
                         <tr align="center">
-                            <td align="center" class="border border-2 text-capitalize"> Máy X-Ray 1</td>
-                            <td id="tinh_trang_thiet_bi_1_default" align="center" class="border border-2"> 
+                         
+                            <td align="center" class="border border-2 text-capitalize"> <%= list[i].name %></td>
+                            <td id="tinh_trang_thiet_bi_<%= i %>_default" align="center" class="border border-2"> 
                                 <!-- Đặt vòng for ở đây  -->
+                                
                                 <!-- Đặt if ở đây -->
-                                <div id="thiet_bi_1_round-1" class="rounded-circle" style="background-color: green; width: 25px; height: 25px;"></div>
-                                <div id="thiet_bi_1_round-2" class="rounded-circle" style="background-color: yellow; width: 25px; height: 25px;"></div>
-                                <div id="thiet_bi_1_round-3" class="rounded-circle" style="background-color: red; width: 25px; height: 25px;"></div>
-                            </td>
-                            <td id="modify_option" align="center" class="border border-2 text-capitalize"><nobr class="btn btn-primary">sửa</nobr></td>
+                                <% if(list[i].status === "available"){ %>
+                                <div id="thiet_bi_1_round-1" class="rounded-circle" style="background-color: green; width: 25px; height: 25px;" ></div>
+                                <% } else if (list[i].status === "maintenance") { %>
+                                <div id="thiet_bi_1_round-2" class="rounded-circle" style="background-color: yellow; width: 25px; height: 25px;" ></div>
+                                <% } else if (list[i].status === "unavailable") { %>
+                                <div id="thiet_bi_1_round-3" class="rounded-circle" style="background-color: red; width: 25px; height: 25px;" ></div>
+                                <% } %>
+                               
+                            </td>c
 
-                            <td id="tinh_trang_thiet_bi_1_modify" align="center" class="border border-2">
+                            <td id="modify_option_<%= i %>" align="center" class="border border-2 text-capitalize"><nobr class="btn btn-primary" onclick="">sửa</nobr></td>
+                            
+                            <td id="tinh_trang_thiet_bi_<%= i %>_modify" align="center" class="border border-2">
                                 <div class="input-group mb-3">
-                                    <label class="input-group-text text-capitalize" for="update_tinh_trang_thiet_bi_1">tình trạng</label>
-                                    <select class="form-select" id="update_tinh_trang_thiet_bi_1" name="update_tinh_trang_thiet_bi_1">                        
-                                      <option value="Khả Dụng">Khả Dụng</option>
-                                      <option value="Đang Bảo Trì">Đang Bảo Trì</option>
-                                      <option value="Không Khả Dụng">Không Khả Dụng</option>
+                                    <label class="input-group-text text-capitalize" for="update_tinh_trang_thiet_bi_<%= i %>">tình trạng</label>
+                                    <select class="form-select" id="update_tinh_trang_thiet_bi_<%= i %>" name="update_tinh_trang_thiet_bi_<%= i %>" > 
+                                      <option value="unavailable" <% if (list[i].status === "unavailable") { %> selected <% } %> >Không Khả Dụng</option>                       
+                                      <option value="available" <% if (list[i].status === "available") { %> selected <% } %> >Khả Dụng</option>
+                                      <option value="maintenance" <% if (list[i].status === "maintenance") { %> selected <% } %> >Đang Bảo Trì</option>
                                     </select>
                                 </div>
                             </td>
-                            <td id="update_option" align="center" class="border border-2 text-capitalize">
+                            
+                           
+                            <td id="update_option_<%= i %>" align="center" class="border border-2 text-capitalize">
                                 <input type="submit" class="form-control btn btn-primary" value="Cập Nhật">
                             </td>
+                            
                         </tr>
+                        <% } %>
+                
+                        <!---->
                     </table>
                 </div>
 

@@ -50,6 +50,7 @@ const PaitentSchema = {
             time: String,
             symptom: String,
             guess: String,
+            doctorInCharge: String,
             medicine:[{
                 medicineName: String,
                 medicineUnit: String,
@@ -72,16 +73,27 @@ const DrugSchema = {
 
 const Drugs = mongoose.model("drug", new mongoose.Schema(DrugSchema));
 
-const ItemSchema = {
+// const ItemSchema = {
+//     name: String,
+//     Info: {
+//         id: String,
+//         type: String,
+//         manufacture: String,
+//         condition: String,
+//         maintainancePeriod: String
+//     }
+// }\
+
+const ToolSchema = {
     name: String,
-    Info: {
-        id: String,
-        type: String,
-        manufacture: String,
-        condition: String,
-        maintainancePeriod: String
-    }
+    condition: String,
+    id: String,
+    last_maintenance_date: String,
+    next_maintenance_date: String,
+    status: String
 }
+
+const Tools = mongoose.model("tool", new mongoose.Schema(ToolSchema));
 
 class Information{
     constructor(name, age, gender){
@@ -259,8 +271,6 @@ const docInfo = new DoctorInfo(
 )
 
 let Doc1 = new Doctor("KhanhPear3107", "hello123", "lekhanh98777@gmail.com", docInfo);
-
-const Items = mongoose.model("item", new mongoose.Schema(ItemSchema));
 
 //console.log(Doctors.findById("661d60fde541367b45a20673"));
 
@@ -564,7 +574,7 @@ app.post("/checkUp/:DocID", async function(req, res){
     let guess = req.body.chan_doan_ke_don;
     let item = []; //for(let i = 0; i < 5; i++){item.push(req.body.select_may_moc_i);}
     let medicine = [];
-
+    
     for(let i = 1; i <= 5; i++){
         let drugName = req.body["select_thuoc_" + i]
         if(drugName !== "Chọn Thuốc:"){
@@ -580,11 +590,15 @@ app.post("/checkUp/:DocID", async function(req, res){
         }
     }
 
+    const Doc = await Doctors.findOne({_id: ID});
+   // console.log(Doc.Info.name);
+
     const progress = {
         dayInfo: {
             time: now.getDate() + "/" + (now.getMonth() + 1) + "/" + now.getFullYear() + " - " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds(),
             symptom: symptom,
             guess: guess,
+            doctorInCharge: Doc.Info.name,
             medicine: medicine
         }
     }
@@ -608,9 +622,42 @@ app.get("/medicineStorage/:DocID", function(req, res){
 app.get("/equipment/:DocID", function(req, res){
     let ID = (req.params.DocID);
     Doctors.findOne({_id: ID}, function(err, doctorData){
-        res.render("equipment", {data: doctorData});
+        Tools.find({}, function(err, toolData){
+            res.render("equipment", {data: doctorData, list: toolData});
+        }) 
     })
 });
+  
+  
+app.post("/equipment/:DocID", async function(req, res) {
+    const toolbox = await Tools.find({});
+    let stat1 = req.body.update_tinh_trang_thiet_bi_0;
+    let stat2 = req.body.update_tinh_trang_thiet_bi_1;
+    let stat3 = req.body.update_tinh_trang_thiet_bi_2;
+    console.log(stat1);
+    console.log(stat2);
+    console.log(stat3);
+    
+    for(let i = 0; i < toolbox.length; i++){
+        let stat = req.body[`update_tinh_trang_thiet_bi_${i}`];
+        let color = req.body["color" + i];
+        console.log("\n");
+        
+        let equipmentName = toolbox[i].name;
+        //console.log(equipmentName);
+        
+        let currentStatus = toolbox[i].status;
+
+        if(stat !== currentStatus ){
+            await Tools.findOneAndUpdate({name: equipmentName}, {$set: {status: stat}});
+        }
+       
+    }
+    
+    //FindandChange(equipmentName, stat);
+    res.redirect("/equipment/" + req.params.DocID);
+});
+
 
 //Tài khoản của bệnh nhân quản lý ở đây-----------------------------------------//
 
@@ -708,13 +755,6 @@ app.post("/profile/:GuestID/:DocID", async function(req, res){
     let guestID = (req.params.GuestID);
 
     let bookingDay = req.body.booking;
-    // if (bookingDay instanceof Date) {
-    //     console.log("bookingDay là một đối tượng Date.");
-    //     // Tiếp tục xử lý nếu cần thiết
-    // } else {
-    //     console.log("bookingDay không phải là một đối tượng Date.");
-    //     // Thực hiện xử lý để chuyển đổi hoặc báo lỗi tùy thuộc vào trường hợp
-    // }
 
     let newpait = {
         paitentID: guestID,
@@ -730,11 +770,8 @@ app.post("/profile/:GuestID/:DocID", async function(req, res){
     let doctorIncharge = await Doctors.findOneAndUpdate({_id: docID},{$push: {listOfPaitent: newpait}});
     await Paitents.findOneAndUpdate({_id: guestID}, {$set: {currentDoctor: doctorIncharge}});
 
-    res.redirect("/profile/" + guestID + "/" + docID);
-    //res.render("profile");
-    // Doctors.findOne({_id: docID}, function(err, doctor){
-    //     res.render("profile", {doctor: doctor, paitData: guestID})
-    // })
+    res.redirect("/profile/" + guestID + "/" + docID + "?message=success");
+    
  });
  //------------------------------------------------------------------------
 

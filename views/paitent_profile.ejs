@@ -112,20 +112,21 @@
 
       <div class="container border border-black">
 
-        <%for(var i = 0; i < paitData.conditionProgress.length; i++){ %>
+        <%for(var i = paitData.conditionProgress.length - 1; i >= 0; i--){ %>
         
           <div class="row">
             <div class="col m-4">
               
               <h6>Ngày: <%=paitData.conditionProgress[i].dayInfo.time%></h6>
+              <h6>Bác sĩ chuẩn đoán: <%=paitData.conditionProgress[i].dayInfo.doctorInCharge%></h6>
               <h6>Triệu chứng: <%=paitData.conditionProgress[i].dayInfo.symptom%></h6>
               <h6>Chẩn đoán:<%=paitData.conditionProgress[i].dayInfo.guess%></h6>
               <h6>Toa thuốc: </h6>
               
               <div class="row">
                 
-                <div class="col col-md-3"></div>
                 <% for(var j = 0; j < paitData.conditionProgress[i].dayInfo.medicine.length; j++){ %>
+                <div class="col col-md-3"></div>
                 <div class="col col-md-3">
                   <h6 style="tab-size: 2;"><%=(j + 1)%>. <%=paitData.conditionProgress[i].dayInfo.medicine[j].medicineName%></h6>
                 </div>
