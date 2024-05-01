@@ -595,13 +595,15 @@ app.post("/checkUp/:DocID", async function(req, res){
     let item = []; //for(let i = 0; i < 5; i++){item.push(req.body.select_may_moc_i);}
     let medicine = [];
     let tool = req.body.select_may_moc_1;
+    let med = req.body.additionalInfo;
+    console.log("quantity", med[4]);
     for(let i = 1; i <= 5; i++){
         let drugName = req.body["select_thuoc_" + i]
         if(drugName !== "Chọn Thuốc:"){
             const medic = { 
                 medicineName: drugName,
                 medicineUnit: (await Drugs.findOne({name: drugName})).unit,
-                quantity: 5,
+                quantity: med[i-1],
                 comment: "mỗi buổi sáng dùng 1 lần"
             }
             medicine.push(medic);
