@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const moment = require("moment");
 
 const now = new Date();
 
@@ -558,10 +559,13 @@ app.get("/paitentLookup/:DocID/:PaitID",  function(req, res){
 });
 
 //checkup sẽ đi tới chỗ kê đơn của bác sĩ cho một bệnh nhân
-app.get("/checkUp/:DocID", function(req, res){
+app.get("/checkUp/:DocID", async function(req, res){
     let ID = (req.params.DocID);
+    let drugStore = await Drugs.find({});
+    let toolStore = await Tools.find({});
+    //console.log(drugStore);
     Doctors.findOne({_id: ID}, function(err, doctorData){
-        res.render("doctorCheckup", {data: doctorData});
+        res.render("doctorCheckup", {data: doctorData, drugData: drugStore, toolData: toolStore});
     })
 });
 
@@ -596,7 +600,8 @@ app.post("/checkUp/:DocID", async function(req, res){
     let medicine = [];
     let tool = req.body.select_may_moc_1;
     let med = req.body.additionalInfo;
-    console.log("quantity", med[4]);
+    let cmt = req.body.comment;
+    //console.log("quantity", med[4]);
     for(let i = 1; i <= 5; i++){
         let drugName = req.body["select_thuoc_" + i]
         if(drugName !== "Chọn Thuốc:"){
@@ -604,7 +609,7 @@ app.post("/checkUp/:DocID", async function(req, res){
                 medicineName: drugName,
                 medicineUnit: (await Drugs.findOne({name: drugName})).unit,
                 quantity: med[i-1],
-                comment: "mỗi buổi sáng dùng 1 lần"
+                comment: cmt[i-1]
             }
             medicine.push(medic);
 
@@ -699,10 +704,11 @@ app.post("/equipment/:DocID", async function(req, res) {
 
 
 //guestAcc sẽ giúp ta đến với trang chủ chính của bênh nhân khi đăng nhập
-app.get("/guestAcc/:GuestID", function(req, res){
+app.get("/guestAcc/:GuestID", async function(req, res){
     let ID = (req.params.GuestID);
-    Paitents.findOne({_id: ID}, function(err, paitentData){
-        res.render("paitentAccount", {data: paitentData});
+    const docData = await Doctors.find({});
+    await Paitents.findOne({_id: ID}, function(err, paitentData){
+        res.render("paitentAccount", {data: paitentData, doctor: docData});
     })
 });
 
