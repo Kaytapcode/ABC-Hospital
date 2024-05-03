@@ -215,7 +215,9 @@
                     <option value="Tủ lồng kính" class="may_moc_7">Tủ lồng kính</option>-->
                     <option>Chọn Máy:</option>
                     <% for(let i = 0; i < toolData.length; i++){ %>
+                      <% if(toolData[i].status==="available"){%>
                       <option value="<%=toolData[i].name%>" class="may_moc_<%=i%>"><%=toolData[i].name%></option>
+                    <% } %>
                     <% } %>
                   </select>
                 </div>
@@ -234,9 +236,11 @@
               <div class="col col-md-8">
                 <div class="input-group mb-3">
                   <select class="form-select" id="select_may_moc_2" name="select_may_moc_2">
-                    <option>Bệnh nhân:</option>
+                    <option>Chọn máy:</option>
                     <% for(let i = 0; i < toolData.length; i++){ %>
+                      <% if(toolData[i].status==="available"){%>
                       <option value="<%=toolData[i].name%>" class="may_moc_<%=i%>"><%=toolData[i].name%></option>
+                    <% } %>
                     <% } %>
                   </select>
                 </div>
@@ -258,7 +262,9 @@
                     
                     <option>Chọn Máy:</option>
                     <% for(let i = 0; i < toolData.length; i++){ %>
+                      <% if(toolData[i].status==="available"){%>
                       <option value="<%=toolData[i].name%>" class="may_moc_<%=i%>"><%=toolData[i].name%></option>
+                    <% } %>
                     <% } %>
                   </select>
                 </div>
@@ -279,7 +285,9 @@
                   <select class="form-select" id="select_may_moc_4" name="select_may_moc_4">
                     <option>Chọn Máy:</option>
                     <% for(let i = 0; i < toolData.length; i++){ %>
+                      <% if(toolData[i].status==="available"){%>
                       <option value="<%=toolData[i].name%>" class="may_moc_<%=i%>"><%=toolData[i].name%></option>
+                    <% } %>
                     <% } %>
                   </select>
                 </div>
@@ -300,7 +308,9 @@
                   <select class="form-select" id="select_may_moc_5" name="select_may_moc_5">
                     <option>Chọn Máy:</option>
                     <% for(let i = 0; i < toolData.length; i++){ %>
+                      <% if(toolData[i].status==="available"){%>
                       <option value="<%=toolData[i].name%>" class="may_moc_<%=i%>"><%=toolData[i].name%></option>
+                    <% } %>
                     <% } %>
                   </select>
                 </div>

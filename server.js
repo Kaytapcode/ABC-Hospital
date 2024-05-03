@@ -682,14 +682,14 @@ app.post("/equipment/:DocID", async function(req, res) {
     let stat1 = req.body.update_tinh_trang_thiet_bi_0;
     let stat2 = req.body.update_tinh_trang_thiet_bi_1;
     let stat3 = req.body.update_tinh_trang_thiet_bi_2;
-    console.log(stat1);
-    console.log(stat2);
-    console.log(stat3);
+    // console.log(stat1);
+    // console.log(stat2);
+    // console.log(stat3);
     
     for(let i = 0; i < toolbox.length; i++){
         let stat = req.body[`update_tinh_trang_thiet_bi_${i}`];
         let color = req.body["color" + i];
-        console.log("\n");
+        // console.log("\n");
         
         let equipmentName = toolbox[i].name;
         //console.log(equipmentName);
