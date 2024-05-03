@@ -746,7 +746,7 @@ app.post("/personalInfo/:GuestID", async function(req, res){
     let changedgender = req.body.gender_modify;
     let changedjob = req.body.job_modify;
 
-    console.log(changedgender);
+    // console.log(changedgender);
 
     if(changedname !== basePaitent.Info.name){
         await Paitents.findOneAndUpdate({_id: ID}, {$set: {'Info.name': changedname}});
