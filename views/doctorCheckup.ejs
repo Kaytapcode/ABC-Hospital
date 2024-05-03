@@ -82,15 +82,40 @@
         
         <form action="/checkUp/<%=data._id%>" method="POST">
           <div class="container">
+            <script type="text/javascript">
+              var lists =  <%- JSON.stringify(lists) %>;
+              $(document).ready(function() {
+                $("#name_ke_don").show();
+                $("#name_ke_don").change(function() {
+      findselect("#name_ke_don");
+    });
+              });
+              function findselect(id) {
+    let temp = document.querySelector(id).value;
+    for (let i = 0; i < lists.length; i++) {
+      if (temp === lists[i].Info.name) {
+        document.getElementById("number_ke_don").value = lists[i].paitCode;
+        break;
+      }
+    }
+  }
+            </script>
+
             <div class="row input-group mb-4">
               <div class="col col-md-3">
                 <h4 class="text-uppercase">họ và tên bệnh nhân: </h4>
               </div>
 
-              <div class="col col-md-8">
+              <!-- <div class="col col-md-8">
                 <input type="text" id="name_ke_don" name="name_ke_don" class="form-control">
-              </div>
-
+              </div> -->
+              
+              <select class="form-select" id="name_ke_don" name="name_ke_don">
+                <option>Bệnh nhân:</option>
+                <% for(var i = 0; i < lists.length; i++){ %>
+                  <option value="<%= lists[i].Info.name%>" class="paitent<%=i%>"><%= lists[i].Info.name%></option>
+                <% } %>
+              </select> 
               <div class="col col-md-1"></div>
             </div>
 
@@ -209,7 +234,7 @@
               <div class="col col-md-8">
                 <div class="input-group mb-3">
                   <select class="form-select" id="select_may_moc_2" name="select_may_moc_2">
-                    <option>Chọn Máy:</option>
+                    <option>Bệnh nhân:</option>
                     <% for(let i = 0; i < toolData.length; i++){ %>
                       <option value="<%=toolData[i].name%>" class="may_moc_<%=i%>"><%=toolData[i].name%></option>
                     <% } %>

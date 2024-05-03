@@ -563,10 +563,17 @@ app.get("/checkUp/:DocID", async function(req, res){
     let ID = (req.params.DocID);
     let drugStore = await Drugs.find({});
     let toolStore = await Tools.find({});
-    //console.log(drugStore);
-    Doctors.findOne({_id: ID}, function(err, doctorData){
-        res.render("doctorCheckup", {data: doctorData, drugData: drugStore, toolData: toolStore});
-    })
+    let doctorOb = await Doctors.findOne({_id: ID});
+    let paitlist = [];
+    
+    for(let i = 0; i < doctorOb.listOfPaitent.length; i++){
+        let checkID = doctorOb.listOfPaitent[i].paitentID;
+        let ob = await Paitents.findOne({_id: checkID});
+        //console.log(obj);
+        paitlist.push(ob);
+    }
+
+    res.render("doctorCheckup", {data: doctorOb, lists: paitlist, drugData: drugStore, toolData: toolStore});
 });
 
 //post checkup (kê đơn) ở đây sẽ giúp cập nhật thêm 1 chuẩn đoán và lưu vào lịch sử khám của bệnh nhân
