@@ -85,16 +85,16 @@
             <script type="text/javascript">
               var lists =  <%- JSON.stringify(lists) %>;
               $(document).ready(function() {
-                $("#name_ke_don").show();
-                $("#name_ke_don").change(function() {
-      findselect("#name_ke_don");
+                $("#number_ke_don").show();
+                $("#number_ke_don").change(function() {
+      findselect("#number_ke_don");
     });
               });
               function findselect(id) {
     let temp = document.querySelector(id).value;
     for (let i = 0; i < lists.length; i++) {
-      if (temp === lists[i].Info.name) {
-        document.getElementById("number_ke_don").value = lists[i].paitCode;
+      if (temp === lists[i].paitCode) {
+        document.getElementById("name_ke_don").value = lists[i].Info.name;
         break;
       }
     }
@@ -106,30 +106,30 @@
                 <h4 class="text-uppercase">họ và tên bệnh nhân: </h4>
               </div>
 
-              <!-- <div class="col col-md-8">
+              <div class="col col-md-8">
                 <input type="text" id="name_ke_don" name="name_ke_don" class="form-control">
-              </div> -->
+              </div>
               
-              <select class="form-select" id="name_ke_don" name="name_ke_don">
-                <option>Bệnh nhân:</option>
-                <% for(var i = 0; i < lists.length; i++){ %>
-                  <option value="<%= lists[i].Info.name%>" class="paitent<%=i%>"><%= lists[i].Info.name%></option>
-                <% } %>
-              </select> 
-              <div class="col col-md-1"></div>
-            </div>
-
+              
             <div class="row input-group mb-4">
               <div class="col col-md-3">
                 <h4 class="text-uppercase">mã số bệnh nhân: </h4>
               </div>
 
-              <div class="col col-md-8">
+              <!-- <div class="col col-md-8">
                 <input type="text" id="number_ke_don" name="number_ke_don" class="form-control">
-              </div>
-
+              </div> -->
+              <select class="form-select" id="number_ke_don" name="number_ke_don">
+                <option>Bệnh nhân:</option>
+                <% for(var i = 0; i < lists.length; i++){ %>
+                  <option value="<%= lists[i].paitCode%>" class="paitent<%=i%>"><%= lists[i].paitCode%></option>
+                <% } %>
+              </select> 
               <div class="col col-md-1"></div>
             </div>
+<!-- 
+              <div class="col col-md-1"></div>
+            </div> -->
 
             <div class="row input-group mb-4">
               <div class="col col-md-3">
@@ -154,7 +154,6 @@
 
               <div class="col col-md-1"></div>
             </div>
-
             <script type="text/javascript">
               var toolData =  <%- JSON.stringify(toolData) %>;
               $(document).ready(function() {
@@ -319,203 +318,85 @@
               <div class="col col-md-1"></div>
             </div>
 
-            <script type="text/javascript">
-              var drugData = <%- JSON.stringify(drugData) %>;
+            <script>
+            function addnewdrug() {
+              var newinput = document.createElement("div");
+              newinput.className = "row input-group mb-4";
+              newinput.innerHTML = `
+                <div class="col col-md-3">
+                  <h4 class="text-uppercase">Thuốc: </h4>
+                </div>
+                <div class="col col-md-8">
+                  <div class="input-group mb-3">
+                    <select class="form-select" name="select_thuoc">
+                      <option selected>Chọn Thuốc:</option>
+                      <% for(let i = 0; i < drugData.length; i++){ %>
+                        <% if(drugData[i].quantity > 0){ %>
+                          <option value="<%= drugData[i].name %>"><%= drugData[i].name %></option>
+                        <% } %>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                  <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
+                </div>
+                <div class="col col-md-8">
+                  <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+  
+                <div class="col col-md-1">
+                  <p class="btn btn-primary" onclick="addnewdrug()"> + </p>
+                  <p class="btn btn-primary" onclick="removeInput(this)"> - </p>
+                </div>
+              `;
 
-              $(document).ready(function() {
-                $("#input_thuoc_1").show();
-                $("#input_thuoc_2").hide();
-                $("#input_thuoc_3").hide();
-                $("#input_thuoc_4").hide();
-                $("#input_thuoc_5").hide();
-              });
-
-              function hide_the_selected_thuoc(id, nextshow) {
-                let temp = document.querySelector(id).value;
-                let id_selected;
-                for(let i = 0; i < drugData.length; i++){
-                  if(temp === drugData[i].name){
-                    id_selected = ".thuoc_" + i;
-                  }
-                }
-
-                // if(temp == "Paracetamol") {
-                //   id_selected = ".thuoc_1";
-                // } else if(temp == "Alexan") {
-                //   id_selected = ".thuoc_2";
-                // } else if(temp == "Motilum M") {
-                //   id_selected = ".thuoc_3";
-                // } else if(temp == "Smecta") {
-                //   id_selected = ".thuoc_4";
-                // } else if(temp == "Mỡ Eurax") {
-                //   id_selected = ".thuoc_5";
-                // } else if(temp == "Oxy già") {
-                //   id_selected = ".thuoc_6";
-                // } else if(temp == "Nước muối sinh lý") {
-                //   id_selected = ".thuoc_7";
-                // }
-                
-                $(document).ready(function() {
-                  $(id_selected).hide();
-                  $(nextshow).show();
-                });
-              }
+              document.getElementById("input_thuoc_container").appendChild(newinput);
+            }
+            
+            function removeInput(element) {
+              var inputGroup = element.closest(".row.input-group");
+              inputGroup.parentNode.removeChild(inputGroup);
+            }
+            
             </script>
-
-            <div class="row input-group mb-4" id="input_thuoc_1">
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Thuốc: </h4>
-              </div>
-<!-- Select thuoc 1 -->
-              <div class="col col-md-8" style="width: 594px;">
-                <div class="input-group mb-3" >
-                  <select class="form-select" id="select_thuoc_1" name="select_thuoc_1">
-                    <option selected>Chọn Thuốc:</option>
-                    <% for(let i = 0; i < drugData.length; i++){ %>
-                      <option value="<%=drugData[i].name%>" class="thuoc_<%=i%>"><%=drugData[i].name%></option>
-                    <% } %>
-                  </select>
+            <div id="input_thuoc_container">
+              <!-- Các trường nhập liệu ban đầu -->
+              <div class="row input-group mb-4">
+                <div class="col col-md-3">
+                  <h4 class="text-uppercase">Thuốc: </h4>
+                </div>
+                <div class="col col-md-8">
+                  <div class="input-group mb-3">
+                    <select class="form-select" name="select_thuoc">
+                      <option selected>Chọn Thuốc:</option>
+                      <% for(let i = 0; i < drugData.length; i++){ %>
+                        <% if(drugData[i].quantity > 0){ %>
+                          <option value="<%= drugData[i].name %>"><%= drugData[i].name %></option>
+                        <% } %>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                  <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
+                </div>
+                <div class="col col-md-8">
+                  <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+  
+                <div class="col col-md-1">
+                  <p class="btn btn-primary" onclick="addnewdrug()"> + </p>
                 </div>
               </div>
-              <div class="input-group mb-3" style="width: 150px;">
-                <input type="text" class="form-control" placeholder="Số lượng" name="additionalInfo">
-              </div>
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
-              </div>
-              <div class="col col-md-8">
-                <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
-              </div>
-              <div class="col col-md-1">
-                <p id="them_thuoc_2" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_1', '#input_thuoc_2')"> + </p>
-              </div>
             </div>
-
-            <div class="row input-group mb-4" id="input_thuoc_2">
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Thuốc: </h4>
-              </div>
-<!-- Select thuoc 2 -->
-              <div class="col col-md-8" style="width: 594px;">
-                <div class="input-group mb-3">
-                  <select class="form-select" id="select_thuoc_2" name="select_thuoc_2">
-                    <option selected>Chọn Thuốc:</option>
-                    <% for(let i = 0; i < drugData.length; i++){ %>
-                      <option value="<%=drugData[i].name%>" class="thuoc_<%=i%>"><%=drugData[i].name%></option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-              <div class="input-group mb-3" style="width: 150px;">
-                <input type="text" class="form-control" placeholder="Số lượng" name="additionalInfo">
-              </div>
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
-              </div>
-              <div class="col col-md-8">
-                <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
-              </div>
-              
-              <div class="col col-md-1">
-                <p id="them_thuoc_3" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_2', '#input_thuoc_3')"> + </p>
-              </div>
-            </div>
-
-            <div class="row input-group mb-4" id="input_thuoc_3">
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Thuốc: </h4>
-              </div>
-<!-- Select thuoc 3 -->
-              <div class="col col-md-8" style="width: 594px;">
-                <div class="input-group mb-3">
-                  <select class="form-select" id="select_thuoc_3" name="select_thuoc_3">
-                    <option selected>Chọn Thuốc:</option>
-                    <% for(let i = 0; i < drugData.length; i++){ %>
-                      <option value="<%=drugData[i].name%>" class="thuoc_<%=i%>"><%=drugData[i].name%></option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-              <div class="input-group mb-3" style="width: 150px;">
-                <input type="text" class="form-control" placeholder="Số lượng" name="additionalInfo">
-              </div>
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
-              </div>
-              <div class="col col-md-8">
-                <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
-              </div>
-
-              <div class="col col-md-1">
-                <p id="them_thuoc_4" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_3', '#input_thuoc_4')"> + </p>
-              </div>
-            </div>
-
-            <div class="row input-group mb-4" id="input_thuoc_4">
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Thuốc: </h4>
-              </div>
-<!-- Select thuoc 4 -->
-              <div class="col col-md-8" style="width: 594px;">
-                <div class="input-group mb-3">
-                  <select class="form-select" id="select_thuoc_4" name="select_thuoc_4">
-                    <option selected>Chọn Thuốc:</option>
-                    <% for(let i = 0; i < drugData.length; i++){ %>
-                      <option value="<%=drugData[i].name%>" class="thuoc_<%=i%>"><%=drugData[i].name%></option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-              <div class="input-group mb-3" style="width: 150px;">
-                <input type="text" class="form-control" placeholder="Số lượng" name="additionalInfo">
-              </div>
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
-              </div>
-              <div class="col col-md-8">
-                <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
-              </div>
-
-              <div class="col col-md-1">
-                <p id="them_thuoc_5" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_4', '#input_thuoc_5')"> + </p>
-              </div>
-            </div>
-
-            <div class="row input-group mb-4" id="input_thuoc_5">
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Thuốc: </h4>
-              </div>
-<!-- Select thuoc 5 -->
-              <div class="col col-md-8" style="width: 594px;">
-                <div class="input-group mb-3">
-                  <select class="form-select" id="select_thuoc_5" name="select_thuoc_5">
-                    <option selected>Chọn Thuốc:</option>
-                    <% for(let i = 0; i < drugData.length; i++){ %>
-                      <option value="<%=drugData[i].name%>" class="thuoc_<%=i%>"><%=drugData[i].name%></option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-              <div class="input-group mb-3" style="width: 150px;">
-                <input type="text" class="form-control" placeholder="Số lượng" name="additionalInfo">
-              </div>
-              <div class="col col-md-3">
-                <h4 class="text-uppercase">Lời khuyên của Bác sĩ: </h4>
-              </div>
-              <div class="col col-md-8">
-                <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
-              </div>
-              
-              <div class="col col-md-1"></div>
-            </div>
-
             <div class="row">
               <div class="col col-md-12" align="center"> 
                 <input type="submit" id="submit_maymoc" name="submit_maymoc" value="Xác Nhận" class="btn btn-primary">
               </div>
             </div>
-          </div>
-        </form>
+
+          </form>
     </section>
 
   </main><!-- End #main -->

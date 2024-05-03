@@ -9,7 +9,7 @@ const now = new Date();
 mongoose.connect("mongodb+srv://khanhpear:123@cluster0.rzo0p3f.mongodb.net/hospital?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
 
 const DoctorSchema = {
-    loginName: { type: String, unique: true },
+    loginName: { type: String},
     password: String,
     email: String,
     Info: {
