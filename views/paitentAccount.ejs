@@ -44,7 +44,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="/guestAcc/<%= data._id %>" class="text-decoration-none">ABC Hospital</a></h1>
+      <h1 class="logo me-auto"><a href="/login" class="text-decoration-none">ABC Hospital</a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -63,7 +63,8 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-          <a href="/" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Đăng xuất </a>
+      <a href="../booking/<%= data._id %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+
     </div>
   </header><!-- End Header -->
 
@@ -74,8 +75,8 @@
                 <div class="carousel-item active">
                     <img src="/img/about.jpg" class="d-block w-100" height="800" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h1 style="color: rgb(20, 191, 194);">“Cứu chữa bệnh nhân là sứ mệnh của chúng tôi”</h1>
-                        <p style="color: rgb(20, 191, 194);">_Trưởng khoa thần kinh Jack Sparrow_</p>
+                        <h1 style="color: rgb(13, 139, 141);">“Cứu chữa bệnh nhân là sứ mệnh của chúng tôi”</h1>
+                        <p style="color: rgb(13, 139, 141);">_Trưởng khoa thần kinh Jack Sparrow_</p>
                     </div>
                 </div>
             </div>
@@ -83,18 +84,20 @@
         
         <div class="container-fluid m-4">
             <div class="row flex-row flex-nowrap overflow-auto">
+              <% for(var i = 0 ; i < doctor.length; i++){ %>
                 <div class="col col-4">
                     <div class="card card-block" style="width: 18rem;">
-                        <img src="/img/doctors/doctors-1.jpg" class="card-img-top" alt="...">
+                        <a href="/profile/<%=data._id%>/<%=doctor[i]._id%>"><img src="/img/doctors/<%=doctor[i].Info.image%>" class="card-img-top" alt="..."></a>
                         <div class="card-body">
                             <p class="card-text">
-                                <nobr class="fw-bold">Giám Đốc Y Tế Walter White </nobr> - Lãnh đạo uyên bác, tận tâm và có kiến thức sâu rộng về lĩnh vực y tế.
+                                <nobr class="fw-bold">Bác sĩ <%=doctor[i].Info.name%> </nobr> - <%= doctor[i].Info.comment %>
                             </p>
                         </div>
                     </div>    
                 </div>
+                <% } %>
 
-                <div class="col col-4">
+                <!-- <div class="col col-4">
                     <div class="card card-block" style="width: 18rem;">
                         <img src="/img/doctors/doctors-2.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -125,7 +128,7 @@
                             </p>
                         </div>
                     </div>    
-                </div>
+                </div> -->
             </div>
         </div>    
     </section>
