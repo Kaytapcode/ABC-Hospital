@@ -45,15 +45,13 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="/login" class="text-decoration-none">ABC Hospital</a></h1>
+      <h1 class="logo me-auto"><a href="/docAcc/<%= data._id %>" class="text-decoration-none">ABC Hospital</a></h1>
       
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto fw-bold text-uppercase" href="/docAcc/<%= data._id %>">Home</a></li>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="giao_ca.html">Giao ca</a></li>
           <li><a class="nav-link scrollto fw-bold text-uppercase" href="/paitentList/<%= data._id %>">Theo dõi bệnh nhân</a></li>
-          <li><a class="nav-link scrollto fw-bold text-uppercase" href="/paitentList/<%= data._id %>">Quản lý bệnh án</a></li>
           <li>            
             <div class="dropdown">
                 <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="#">Kê đơn</a>
@@ -68,7 +66,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <!-- <a href="#" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a> -->
+      <a href="/" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Đăng xuất </a>
 
     </div>
   </header><!-- End Header -->
@@ -87,9 +85,9 @@
                       <div class="col-6 m-0 p-0" style="padding: 0px; margin: 0px;">
                         <img class="float-start m-0 p-0" src="/img/doctors/<%= data.Info.image %>" alt="...">
                       </div>
-                      <div class="col-6 m-0 p-0" style="padding: 0px; margin: 0px; width: 300px; height: 200px;">
-                        <h1 class="float-start" style="width: 650px; padding-top: 200px; color: black; text-align: center;">CHỮA BỆNH LÀ NGHĨA VỤ CAO ĐẸP CỦA BÁC SĨ</h1>
-                        <h2 class="float-start" style="width: 650px; padding-top: 200px; color: black;">“chào mừng <%= data.Info.name %>”</h2>
+                      <div class="col-6 m-0 p-0" style="padding: 0px; margin: 0px; width: 500px; height: 200px;">
+                        <h1 class="float-start" style="width: 500px; padding-top: 200px; color: black; text-align: center;">CHỮA BỆNH LÀ NGHĨA VỤ CAO ĐẸP CỦA BÁC SĨ</h1>
+                        <h2 class="float-start" style="width: 500px; padding-top: 200px; color: black;">“Chào mừng <%= data.Info.name %>”</h2>
                         <!-- <p class="float-start" style="float: none; color: black;">_Giám đốc bệnh viện Arthur Pendragon_</p> -->
                       </div>
                     </div>

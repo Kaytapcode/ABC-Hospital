@@ -45,16 +45,16 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="/" class="text-decoration-none">ABC Hospital</a></h1>
+      <h1 class="logo me-auto"><a href="/docAcc/<%= data._id %>" class="text-decoration-none">ABC Hospital</a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/docAcc/<%= data._id %>">Home</a></li>
-            <li><a class="nav-link scrollto fw-bold text-uppercase" href="./gieo_ca.html">Gieo Ca</a></li>          
+            <li><a class="nav-link scrollto fw-bold text-uppercase" href="/docAcc/<%= data._id %>">Home</a></li>       
             <li>            
                 <div class="dropdown">
                     <a class="nav-link scrollto fw-bold text-uppercase dropdown-toggle" href="/checkup/<%= data._id %>">Kê Đơn</a>
                     <ul class="dropdown-menu">
+                    <li><a class="dropdown-item text-uppercase align-items-center" href="/checkup/<%= data._id %>">Kê đơn</a></li>  
                     <li><a class="dropdown-item text-uppercase" href="/medicineStorage/<%= data._id %>">Thuốc</a></li>
                     <li><a class="dropdown-item active text-uppercase" href="/equipment/<%= data._id %>">Trang Thiết Bị</a></li>
                     </ul>
@@ -65,7 +65,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="./booking/index.html" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+      <a href="/" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Đăng xuất </a>
 
     </div>
   </header><!-- End Header -->
@@ -146,7 +146,7 @@
                                 <div id="thiet_bi_1_round-3" class="rounded-circle" style="background-color: red; width: 25px; height: 25px;" ></div>
                                 <% } %>
                                
-                            </td>c
+                            </td>
 
                             <td id="modify_option_<%= i %>" align="center" class="border border-2 text-capitalize"><nobr class="btn btn-primary" onclick="">sửa</nobr></td>
                             

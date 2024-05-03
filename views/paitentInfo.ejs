@@ -45,7 +45,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="/" class="text-decoration-none">ABC Hospital</a></h1>
+      <h1 class="logo me-auto"><a href="/guestAcc/<%= paitData._id %>" class="text-decoration-none">ABC Hospital</a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
@@ -64,7 +64,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="../booking/<%= paitData._id %>" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Booking Bác Sĩ </a>
+      <a href="/" class="appointment-btn scrollto text-decoration-none fw-bold text-uppercase"> Đăng xuất </a>
 
     </div>
   </header><!-- End Header -->
@@ -164,7 +164,8 @@
             </div>
 
             <div class="col col-md-2">
-              <input type="text" name="date_of_birth_modify" id="date_of_birth_modify" value="<%= paitData.Info.dayOfbirth %>" class="form-control">
+              <input type="date" name="date_of_birth_modify" id="date_of_birth_modify" value="<%= paitData.Info.dayOfbirth %>" class="form-control">
+              <!-- <input type="date" name="date_of_birth_modify" id="date_of_birth_modify" value="<%= paitData.Info.dayOfbirth %>" class="form-control" >  -->
             </div>
 
             <div class="col col-md-1">
