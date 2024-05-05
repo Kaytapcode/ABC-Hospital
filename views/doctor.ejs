@@ -82,10 +82,11 @@
             <% for(var i = 0; i < docData.length; i++){ %>
             <div class="col col-md-4">
               <div class="card" style="width: 18rem;">
-                <img src="/img/doctors/<%= docData[i].Info.image %>" class="card-img-top" alt="...">
+                <img src="/img/doctors/<%= docData[i].Info.image %>" class="card-img-top" style="height: 250px; width: 285px" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Bác sĩ <%= docData[i].Info.name %></h5>
                   <p class="card-text"><%= docData[i].Info.commment %></p>
+                  
                   <a href="../profile/<%=paitData._id%>/<%=docData[i]._id%>" class="btn btn-primary">Xem Profile</a>
                 </div>
               </div>
@@ -125,6 +126,7 @@
                 </div>
               </div>
             </div> -->
+            
           </div>
         </div>
     </section>

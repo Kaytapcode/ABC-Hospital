@@ -105,20 +105,24 @@
               <div class="col col-md-3">
                 <h4 class="text-uppercase">họ và tên bệnh nhân: </h4>
               </div>
+              
 
               <div class="col col-md-8">
                 <input type="text" id="name_ke_don" name="name_ke_don" class="form-control">
               </div>
-              
-              
-            <div class="row input-group mb-4">
+
+              <div class="col col-md-1"></div>  
+            
               <div class="col col-md-3">
                 <h4 class="text-uppercase">mã số bệnh nhân: </h4>
+                <div class="col col-md-1"></div>
               </div>
 
               <!-- <div class="col col-md-8">
                 <input type="text" id="number_ke_don" name="number_ke_don" class="form-control">
               </div> -->
+             
+              <div class="col col-md-8">
               <select class="form-select" id="number_ke_don" name="number_ke_don">
                 <option>Bệnh nhân:</option>
                 <% for(var i = 0; i < lists.length; i++){ %>
@@ -127,11 +131,13 @@
               </select> 
               <div class="col col-md-1"></div>
             </div>
+            
 <!-- 
               <div class="col col-md-1"></div>
             </div> -->
-
+            
             <div class="row input-group mb-4">
+             
               <div class="col col-md-3">
                 <h4 class="text-uppercase">triệu chứng: </h4>
               </div>
@@ -420,7 +426,7 @@
               
               <div class="col col-md-1">
                 <p id="them_thuoc_3" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_2', '#input_thuoc_3')"> + </p>
-                <p id="xoa_thuoc_1" class="btn btn-primary" onclick="deleteThuoc('#select_thuoc_2','#select_thuoc_1','#input_thuoc_3','#input_thuoc_2')">-</p>
+                <!-- <p id="xoa_thuoc_1" class="btn btn-primary" onclick="deleteThuoc('#select_thuoc_2','#select_thuoc_1','#input_thuoc_3','#input_thuoc_2')">-</p> -->
               </div>
             </div>
 
@@ -451,7 +457,7 @@
 
               <div class="col col-md-1">
                 <p id="them_thuoc_4" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_3', '#input_thuoc_4')"> + </p>
-                <p id="xoa_thuoc_1" class="btn btn-primary" onclick="deleteThuoc('#select_thuoc_3','#select_thuoc_2','#input_thuoc_4','#input_thuoc_3')">-</p>
+                <!-- <p id="xoa_thuoc_1" class="btn btn-primary" onclick="deleteThuoc('#select_thuoc_3','#select_thuoc_2','#input_thuoc_4','#input_thuoc_3')">-</p> -->
               </div>
             </div>
 
@@ -482,7 +488,7 @@
 
               <div class="col col-md-1">
                 <p id="them_thuoc_5" class="btn btn-primary" onclick="hide_the_selected_thuoc('#select_thuoc_4', '#input_thuoc_5')"> + </p>
-                <p id="xoa_thuoc_1" class="btn btn-primary" onclick="deleteThuoc('#select_thuoc_4','#select_thuoc_3','#input_thuoc_5','#input_thuoc_4')">-</p>
+                <!-- <p id="xoa_thuoc_1" class="btn btn-primary" onclick="deleteThuoc('#select_thuoc_4','#select_thuoc_3','#input_thuoc_5','#input_thuoc_4')">-</p> -->
               </div>
             </div>
 

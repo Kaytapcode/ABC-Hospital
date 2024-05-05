@@ -9,7 +9,7 @@ const now = new Date();
 mongoose.connect("mongodb+srv://khanhpear:123@cluster0.rzo0p3f.mongodb.net/hospital?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true });
 
 const DoctorSchema = {
-    loginName: { type: String},
+    loginName: {type: String, unique: true},
     password: String,
     email: String,
     Info: {
@@ -30,7 +30,7 @@ const DoctorSchema = {
 
 const Doctors = mongoose.model("Doctor", new mongoose.Schema(DoctorSchema));
 
-const PaitentSchema = {
+const PatientSchema = {
     loginName: { type: String, unique: true },
     password: String,
     email: String,
@@ -62,7 +62,7 @@ const PaitentSchema = {
     }]
 }
 
-const Paitents = mongoose.model("Paitent", new mongoose.Schema(PaitentSchema));
+const Paitents = mongoose.model("Paitent", new mongoose.Schema(PatientSchema));
 
 const DrugSchema = {
     name: String,
@@ -388,7 +388,6 @@ app.use(express.static("login_signup"));
 app.get("/", function(req, res){
     let day = "";
     res.render("home", {day: day});
-    //res.send("HELLO MOTHERFUCKER\n");
 });
 
 app.get("/login", function(req, res){
