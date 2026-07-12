@@ -1,9 +1,24 @@
 {
+  "name": "abc-hospital",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ABC Hospital web application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "check": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "mongoose": "^5.13.22",
-    "nodemon": "^3.1.0"
+    "bcryptjs": "^3.0.3",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

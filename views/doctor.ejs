@@ -85,8 +85,8 @@
                 <img src="/img/doctors/<%= list[i].Info.image %>" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Bác sĩ <%= list[i].Info.name %></h5>
-                  <p class="card-text"><%= list[i].Info.commment %></p>
-                  <a href="profile/<%=id=list[i]._id%>" class="btn btn-primary">Xem Profile</a>
+                  <p class="card-text"><%= list[i].Info.comment %></p>
+                  <a href="/profile/<%= list[i]._id %>" class="btn btn-primary">Xem Profile</a>
                 </div>
               </div>
             </div>

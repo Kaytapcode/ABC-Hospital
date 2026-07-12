@@ -40,8 +40,9 @@ This project transforms the patient experience by offering a robust platform for
 
 ### Prerequisites  
 This project requires the following dependencies:  
-- **Programming Language**: Sassy CSS  
-- **Package Manager**: Npm  
+- **Node.js**: 24 or newer
+- **Package Manager**: npm
+- **Database**: MongoDB Atlas or MongoDB-compatible connection string
 
 ### Installation  
 Build ABC-Hospital from the source and install dependencies:  
@@ -61,6 +62,15 @@ Build ABC-Hospital from the source and install dependencies:
    npm install  
    ```  
 
+4. **Create the local environment file:**
+
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+   Replace `MONGODB_URI` in `.env` with the connection string from MongoDB Atlas.
+   Never commit `.env`.
+
 ---
 
 ## Usage  
@@ -69,12 +79,15 @@ Run the project with:
 npm start  
 ```  
 
+Open <http://localhost:5500>. Use `npm run dev` while developing and
+`npm run check` to validate the server syntax.
+
 ---
 
 ## Testing  
-ABC-Hospital uses the {test_framework} test framework. Run the test suite with:  
+The project currently has no automated test suite. Run the syntax check with:
 ```bash  
-npm test  
+npm run check
 ```  
 
 ---

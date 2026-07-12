@@ -85,6 +85,11 @@
       <div class="container" align="center">
       </div>
       <div class="container">
+        <% if (registered) { %>
+          <div class="alert alert-success" role="alert">
+            Đăng ký thành công. Bạn có thể đăng nhập bằng email vừa tạo.
+          </div>
+        <% } %>
         <div class="row">
           <div class="col col-md-6">
             <div align="center" class="h4 fw-bold"> Nhân Viên Y Tế </div>
@@ -116,14 +121,14 @@
             <div class="row">
               <div class="col col-md-1"></div>
               <div class="col col-md-10">
-                <form method="post" action="../forms/login.php">
+                <form method="post" action="/patient-login">
                   <div class="mb-3">
-                    <label for="inputPhoneNumber" class="form-label"> Số Điện Thoại <nobr style="color: red;">*</nobr></label>
-                    <input type="text" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber">
+                    <label for="inputEmail" class="form-label">Email <nobr style="color: red;">*</nobr></label>
+                    <input type="email" class="form-control" id="inputEmail" name="inputEmail" required>
                   </div>
                   <div class="mb-3">
                     <label for="inputPassword2" class="form-label"> Mật Khẩu <nobr style="color: red;">*</nobr></label>
-                    <input type="password" class="form-control" id="inputPassword2" name="inputPassword2">
+                    <input type="password" class="form-control" id="inputPassword2" name="inputPassword" required>
                   </div>
                   <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="check2" name="check2">
